@@ -28,7 +28,7 @@ export default function Hero() {
 
   return (
     <section id="accueil" className="relative">
-      <div className="relative h-[68vh] min-h-[420px] w-full overflow-hidden">
+      <div className="relative h-[60vh] sm:h-[65vh] md:h-[68vh] min-h-[400px] sm:min-h-[420px] w-full overflow-hidden">
         {/* Image Slides */}
         {slides.map((s, i) => (
           <div
@@ -48,33 +48,33 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
         {/* Content Container */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 absolute bottom-10 left-0 right-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 absolute bottom-4 sm:bottom-8 md:bottom-10 left-0 right-0">
           <div className="max-w-2xl animate-fadeInUp">
             {/* Text Container with Backdrop */}
-            <div className="bg-white/85 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-2xl">
+            <div className="bg-white/85 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl shadow-2xl">
               <h1
-                className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight"
                 style={{ textShadow: "1px 1px 3px rgba(255,255,255,0.8)" }}
               >
                 Une Bonne Vision Pour Votre Bien-Être
               </h1>
-              <p className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed">
+              <p className="mt-3 sm:mt-4 text-slate-700 text-sm sm:text-base md:text-lg leading-relaxed">
                 Notre cabinet d'ophtalmologie propose des examens complets, des
                 traitements adaptés et un suivi personnalisé pour préserver
                 votre santé visuelle.
               </p>
 
               {/* CTA Buttons */}
-              <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <a
                   href="#services"
-                  className="inline-flex items-center justify-center rounded-full bg-[#2aa79b] px-6 py-3 text-white font-medium hover:bg-[#1b6f67] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="inline-flex items-center justify-center rounded-full bg-[#2aa79b] px-5 py-2.5 sm:px-6 sm:py-3 text-white text-sm sm:text-base font-medium hover:bg-[#1b6f67] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   Découvrir nos services
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-full ring-2 ring-slate-300 bg-white px-6 py-3 text-slate-700 font-medium hover:bg-slate-50 hover:ring-slate-400 transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="inline-flex items-center justify-center rounded-full ring-2 ring-slate-300 bg-white px-5 py-2.5 sm:px-6 sm:py-3 text-slate-700 text-sm sm:text-base font-medium hover:bg-slate-50 hover:ring-slate-400 transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   Contact
                 </a>
