@@ -14,9 +14,15 @@ export default function ContactFooter() {
             <div className="mt-4 sm:mt-6 grid gap-3 text-sm sm:text-base text-slate-700">
               <p>
                 <strong>Adresse:</strong>
-                <br className="sm:hidden" /> Immeuble Ennaa à droite CNSS, 2ème
-                étage Bureau N°5, Avenue 02 mars 1934, Mahdia
+                <br className="sm:hidden" /> Complexe medical EMNA, Avenue 02
+                mars 1934, 5100 MAHDIA(Tunisie)
               </p>
+              <p>
+                <strong>Repèrage:</strong>
+                <br className="sm:hidden" /> 70m à droite de la CNSS, au dissus
+                de magazin AZIZA et près de CARREFOUR{" "}
+              </p>
+
               <p>
                 <strong>Téléphone:</strong>{" "}
                 <a href="tel:73681081" className="text-brand hover:underline">
@@ -37,7 +43,7 @@ export default function ContactFooter() {
                 </a>
               </p>
               <p>
-                <strong>Horaires:</strong> Lun - Ven: 09:00 - 17:00
+                <strong>Horaires:</strong> Lun - Sam: 08:30 - 13:00
               </p>
             </div>
           </div>

@@ -17,7 +17,7 @@ const reviews: Review[] = [
     text: "Très professionnelle, explications claires et rassurantes.",
   },
   { name: "أمينة", text: "استقبال ممتاز وفحص شامل. أنصح به بشدة.", dir: "rtl" },
-  { name: "بلال", text: "طبيبة محترفة وتوضيحات دقيقة ومطمئنة.", dir: "rtl" },
+  { name: "بلال", text: "طبيب محترف وتوضيحات دقيقة ومطمئنة.", dir: "rtl" },
 ];
 
 function chunkReviews(reviews: Review[], reviewsPerSlide: number) {

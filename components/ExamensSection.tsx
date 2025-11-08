@@ -19,7 +19,7 @@ const examens: ExamType[] = [
       "Réfracteur automatique Nidek",
       "Projecteur de tests Nidek",
       "Frontofocomètre Oculus",
-      "Kératomètre de Javal",
+      "Ophtalmomètre de Javal (Haag-Streit)",
       "Boîte de verres d'essai complète",
       "Montures d'essai",
       "Échelles visuelles Monoyer, Snellen, Pigassou",

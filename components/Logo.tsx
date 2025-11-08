@@ -15,7 +15,9 @@ export default function Logo() {
         />
       </div>
       <div className="leading-tight">
-        <p className="font-semibold">Dr B. Ben Romdhane</p>
+        <p className="font-semibold">
+          Dr Brahim <i className="italic text-lg">Ben Romdhane</i>
+        </p>
         <p className="text-xs text-slate-500">Ophtalmologiste • Depuis 1990</p>
       </div>
     </Link>

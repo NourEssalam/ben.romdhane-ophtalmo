@@ -50,7 +50,7 @@ export const servicesData: ServicesData = {
           "Réfracteur automatique Nidek",
           "Projecteur de tests Nidek",
           "Frontofocomètre Oculus",
-          "Kératomètre de Javal",
+          "Ophtalmomètre de Javal (Haag-Streit)",
           "Boîte de verres d'essai complète",
           "Montures d'essai",
           "Échelles visuelles Monoyer, Snellen, Pigassou",
@@ -69,7 +69,7 @@ export const servicesData: ServicesData = {
         description:
           "Exploration approfondie des structures oculaires et dépistage des pathologies",
         equipment: [
-          "Table élévatrice oscillante Haag Streit",
+          "Table élévatrice coulissante Haag Streit",
           "Biomicroscope 900BQ Haag Streit (LAF)",
           "Ophtalmoscope direct",
           "Fond d'œil",
