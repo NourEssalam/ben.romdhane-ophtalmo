@@ -24,7 +24,7 @@ export default function Biography() {
             À Propos du Docteur
           </h2>
           <p className="text-xs sm:text-sm text-slate-600">
-            Plus de 30 ans d'expertise en ophtalmologie
+            Longue expérience en ophtalmologie
           </p>
         </div>
 

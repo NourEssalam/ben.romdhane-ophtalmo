@@ -46,7 +46,7 @@ export const servicesData: ServicesData = {
         description:
           "Évaluation complète de votre capacité visuelle avec des équipements de précision",
         equipment: [
-          "Auto-réfracteur Canon",
+          "Auto-réfractomètre Canon",
           "Réfracteur automatique Nidek",
           "Projecteur de tests Nidek",
           "Frontofocomètre Oculus",
@@ -71,18 +71,17 @@ export const servicesData: ServicesData = {
         equipment: [
           "Table élévatrice coulissante Haag Streit",
           "Biomicroscope 900BQ Haag Streit (LAF)",
-          "Ophtalmoscope direct",
-          "Fond d'œil",
-          "Glaucométrie - Mesure de la tension oculaire",
+          "Ophtalmoscope direct pour fond d'œil",
+          "Tonomètre - Mesure de la tension oculaire(Glaucome)",
         ],
         applications: [
           "Exploration segment antérieur de l'œil",
-          "Conjonctivites et sécheresse oculaire",
-          "Pathologies de la cornée et du cristallin",
+          "Examen de la conjunctive",
+          "Examen de la cornée et du cristallin",
           "Examen de la rétine et du nerf optique",
           "Exploration des vaisseaux rétiniens",
-          "Diagnostic du glaucome",
           "Maladies de la choroïde et papilles optiques",
+          "Diagnostic du glaucome",
         ],
       },
     },
@@ -129,7 +128,7 @@ export const servicesData: ServicesData = {
             name: "Traitement Médical",
             desc: "Collyres, médicaments systémiques",
           },
-          { name: "Traitement Laser", desc: "Photocoagulation, laser YAG" },
+          { name: "Traitement Laser", desc: "Photocoagulation, laser ARGON" },
           {
             name: "Traitement Chirurgical",
             desc: "Interventions spécialisées",
