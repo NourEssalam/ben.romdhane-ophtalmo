@@ -8,7 +8,7 @@ export default function ContactFooter() {
               Contact & Informations
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-700">
-              N'hésitez pas à nous contacter pour une consultation ou toute
+              N’hésitez pas à nous contacter pour une consultation ou toute
               information complémentaire.
             </p>
             <div className="mt-4 sm:mt-6 grid gap-3 text-sm sm:text-base text-slate-700">

@@ -59,7 +59,7 @@ export default function Hero() {
                 Une Bonne Vision Pour Votre Bien-Être
               </h1>
               <p className="mt-3 sm:mt-4 text-slate-700 text-sm sm:text-base md:text-lg leading-relaxed">
-                Notre cabinet d'ophtalmologie propose des examens complets, des
+                Notre cabinet d’ophtalmologie propose des examens complets, des
                 traitements adaptés et un suivi personnalisé pour préserver
                 votre santé visuelle.
               </p>

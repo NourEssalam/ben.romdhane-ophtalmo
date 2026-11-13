@@ -149,7 +149,7 @@ export default function Services() {
         {/* Bottom CTA */}
         <div className="mt-6 sm:mt-8 md:mt-10 text-center">
           <p className="text-xs sm:text-sm text-slate-700 mb-2 sm:mb-3">
-            Besoin d'un examen ou d'une consultation ?
+            Besoin d’un examen ou d’une consultation ?
           </p>
           <Link
             href="#contact"

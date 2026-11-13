@@ -105,14 +105,14 @@ export default function Biography() {
                     <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
                       <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" />
                       <span>
-                        Cabinet libéral en ophtalmologie à Ksar-Hellal (jusqu'en
+                        Cabinet libéral en ophtalmologie à Ksar-Hellal (jusqu’en
                         2018)
                       </span>
                     </li>
                     <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
                       <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" />
                       <span>
-                        Cabinet d'ophtalmologie à Mahdia - Complexe médical
+                        Cabinet d’ophtalmologie à Mahdia - Complexe médical
                         EMNA, avenue 02 mars 1934
                       </span>
                     </li>
