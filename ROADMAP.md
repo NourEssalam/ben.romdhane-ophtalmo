@@ -11,8 +11,10 @@ Phase 4 – Install Payload: packages, payload.config.ts, app/(payload) from bla
 @payload-config alias, .env.example. Verify withPayload works with Turbopack. /admin loads locally.
 Phase 5 – Schema: collections Media, Testimonials, ServiceCategories (subcategories, images, lists);
 globals Hero, Biography, Contact, SiteSettings (title/description). Model on lib/servicesData.ts.
-Phase 6 – Server data: pages become server components fetching via Local API; keep only interactive
-parts as small client components; replace window.location menu with next/link.
-Phase 7 – Seed: script importing current hardcoded content + images into Payload; delete hardcoded data after.
+Phase 6 – Seed: scripts/seed.ts (`pnpm seed`, payload run + Local API) imports current hardcoded content
++ images into Payload. Idempotent (match on slug/unique keys). Deletes nothing; frontend untouched.
+Phase 7 – Server data: pages become server components fetching via Local API; keep only interactive
+parts as small client components; replace window.location menu with next/link. At the end, delete the
+hardcoded data (lib/servicesData.ts, inline content arrays/text in components) now served by Payload.
 Phase 8 – Production: Blob storage adapter, Blob host in remotePatterns, prod migrations
 (payload migrate:create), app/sitemap.ts to fix robots.txt, Vercel env vars.
