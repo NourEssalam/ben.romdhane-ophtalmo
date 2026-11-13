@@ -67,6 +67,9 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    'service-categories': ServiceCategory;
+    testimonials: Testimonial;
+    media: Media;
     users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -75,6 +78,9 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    'service-categories': ServiceCategoriesSelect<false> | ServiceCategoriesSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -85,8 +91,18 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    hero: Hero;
+    biography: Biography;
+    contact: Contact;
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    hero: HeroSelect<false> | HeroSelect<true>;
+    biography: BiographySelect<false> | BiographySelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -114,6 +130,109 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-categories".
+ */
+export interface ServiceCategory {
+  id: number;
+  slug: 'examens' | 'pathologies' | 'interventions';
+  sortOrder?: number | null;
+  icon: 'eye' | 'microscope' | 'zap';
+  title: string;
+  subtitle?: string | null;
+  card?: {
+    description?: string | null;
+    image?: (number | null) | Media;
+    features?:
+      | {
+          item: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  subcategories?:
+    | {
+        /**
+         * Ex. : acuite, couleurs, globes. Sans espaces ni accents.
+         */
+        key: string;
+        name: string;
+        image: number | Media;
+        description: string;
+        equipment?:
+          | {
+              item: string;
+              id?: string | null;
+            }[]
+          | null;
+        applications?:
+          | {
+              item: string;
+              id?: string | null;
+            }[]
+          | null;
+        conditions?:
+          | {
+              item: string;
+              id?: string | null;
+            }[]
+          | null;
+        treatments?:
+          | {
+              name: string;
+              desc: string;
+              id?: string | null;
+            }[]
+          | null;
+        interventions?:
+          | {
+              name: string;
+              desc: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Décrit l’image pour l’accessibilité et le référencement.
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  name: string;
+  text: string;
+  dir: 'ltr' | 'rtl';
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -164,10 +283,23 @@ export interface PayloadKv {
  */
 export interface PayloadLockedDocument {
   id: number;
-  document?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
+  document?:
+    | ({
+        relationTo: 'service-categories';
+        value: number | ServiceCategory;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
@@ -209,6 +341,102 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-categories_select".
+ */
+export interface ServiceCategoriesSelect<T extends boolean = true> {
+  slug?: T;
+  sortOrder?: T;
+  icon?: T;
+  title?: T;
+  subtitle?: T;
+  card?:
+    | T
+    | {
+        description?: T;
+        image?: T;
+        features?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+      };
+  subcategories?:
+    | T
+    | {
+        key?: T;
+        name?: T;
+        image?: T;
+        description?: T;
+        equipment?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+        applications?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+        conditions?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+        treatments?:
+          | T
+          | {
+              name?: T;
+              desc?: T;
+              id?: T;
+            };
+        interventions?:
+          | T
+          | {
+              name?: T;
+              desc?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  name?: T;
+  text?: T;
+  dir?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -272,6 +500,199 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero".
+ */
+export interface Hero {
+  id: number;
+  slides?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  heading: string;
+  intro?: string | null;
+  primaryCtaLabel?: string | null;
+  secondaryCtaLabel?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "biography".
+ */
+export interface Biography {
+  id: number;
+  photo?: (number | null) | Media;
+  badge?: string | null;
+  headline: string;
+  headlineSubtitle?: string | null;
+  education?: {
+    institution?: string | null;
+    diploma?: string | null;
+  };
+  experience?: {
+    title?: string | null;
+    items?:
+      | {
+          item: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  diplomas?: {
+    title?: string | null;
+    institution?: string | null;
+    items?:
+      | {
+          item: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  intro?: string | null;
+  address?: string | null;
+  landmark?: string | null;
+  phones?:
+    | {
+        /**
+         * Ex. : 73 681 081
+         */
+        display: string;
+        /**
+         * Ex. : 73681081
+         */
+        number: string;
+        id?: string | null;
+      }[]
+    | null;
+  email?: string | null;
+  hours?: string | null;
+  /**
+   * Google Maps › Partager › Intégrer une carte : copier uniquement l’URL du champ src.
+   */
+  mapEmbedUrl?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  title: string;
+  description: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero_select".
+ */
+export interface HeroSelect<T extends boolean = true> {
+  slides?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  heading?: T;
+  intro?: T;
+  primaryCtaLabel?: T;
+  secondaryCtaLabel?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "biography_select".
+ */
+export interface BiographySelect<T extends boolean = true> {
+  photo?: T;
+  badge?: T;
+  headline?: T;
+  headlineSubtitle?: T;
+  education?:
+    | T
+    | {
+        institution?: T;
+        diploma?: T;
+      };
+  experience?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+      };
+  diplomas?:
+    | T
+    | {
+        title?: T;
+        institution?: T;
+        items?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  intro?: T;
+  address?: T;
+  landmark?: T;
+  phones?:
+    | T
+    | {
+        display?: T;
+        number?: T;
+        id?: T;
+      };
+  email?: T;
+  hours?: T;
+  mapEmbedUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
