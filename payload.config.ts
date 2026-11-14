@@ -1,5 +1,6 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import path from "path";
 import { buildConfig } from "payload";
 import type { CollectionConfig } from "payload";
@@ -30,6 +31,7 @@ const Users: CollectionConfig = {
 };
 
 export default buildConfig({
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || "",
   admin: {
     user: Users.slug,
     importMap: {
@@ -51,6 +53,21 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || "",
     },
+    migrationDir: path.resolve(dirname, "migrations"),
   }),
+  plugins: [
+    // Media files in a Public Vercel Blob store. Locally the dev store token
+    // (BLOB_DEV_READ_WRITE_TOKEN) wins; on Vercel only BLOB_READ_WRITE_TOKEN
+    // (prod store) is set. Without any token the plugin disables itself and
+    // Media falls back to local disk.
+    vercelBlobStorage({
+      token: process.env.BLOB_DEV_READ_WRITE_TOKEN || process.env.BLOB_READ_WRITE_TOKEN,
+      clientUploads: true, // browser → Blob, bypasses Vercel's 4.5 MB body limit
+      collections: {
+        // Media read is public, so serve files straight from the Blob CDN URL.
+        media: { disablePayloadAccessControl: true },
+      },
+    }),
+  ],
   sharp,
 });

@@ -1,11 +1,13 @@
 import type { GlobalConfig } from "payload";
 import { anyone, authenticated } from "../access";
+import { ALL_PAGES, globalRevalidate } from "../lib/revalidate";
 
 export const Contact: GlobalConfig = {
   slug: "contact",
   label: "Contact",
   admin: { group: "Contenu" },
   access: { read: anyone, update: authenticated },
+  hooks: globalRevalidate(ALL_PAGES),
   fields: [
     { name: "intro", label: "Texte d’introduction", type: "textarea" },
     { name: "address", label: "Adresse", type: "text" },

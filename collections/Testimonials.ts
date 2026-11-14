@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { anyone, authenticated } from "../access";
+import { HOME, collectionRevalidate } from "../lib/revalidate";
 
 export const Testimonials: CollectionConfig = {
   slug: "testimonials",
@@ -16,6 +17,7 @@ export const Testimonials: CollectionConfig = {
     update: authenticated,
     delete: authenticated,
   },
+  hooks: collectionRevalidate(HOME),
   fields: [
     { name: "name", label: "Nom du patient", type: "text", required: true },
     { name: "text", label: "Témoignage", type: "textarea", required: true },

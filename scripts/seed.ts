@@ -4,8 +4,12 @@
  * Run: pnpm seed   (= payload run scripts/seed.ts)
  *
  * Idempotent: media matched on filename, service categories on slug,
- * testimonials on name; globals are overwritten. Safe to rerun (e.g. against
- * production with Blob storage in Phase 8). Deletes nothing.
+ * testimonials on name; globals are overwritten. Safe to rerun, e.g. against
+ * production. Deletes nothing.
+ *
+ * Images come from scripts/seed-media/. With BLOB_READ_WRITE_TOKEN set they go
+ * to that Blob store; a media doc whose file is missing from the current store
+ * (e.g. dev rows created before Blob) is re-uploaded.
  */
 import path from "path";
 import fs from "fs";
@@ -13,22 +17,165 @@ import { getPayload } from "payload";
 import type { Payload } from "payload";
 import config from "@payload-config";
 
-import { servicesData } from "../lib/servicesData";
 import type { ServiceCategory } from "../payload-types";
 
-const PUBLIC_DIR = path.resolve(process.cwd(), "public");
+const SEED_MEDIA_DIR = path.resolve(process.cwd(), "scripts/seed-media");
 
-type Stat = { created: number; updated: number };
+type Stat = { created: number; updated: number; reuploaded: number };
 const stats: Record<string, Stat> = {};
 const notMapped: string[] = [];
 const bump = (key: string, kind: keyof Stat) => {
-  stats[key] ??= { created: 0, updated: 0 };
+  stats[key] ??= { created: 0, updated: 0, reuploaded: 0 };
   stats[key][kind]++;
 };
 
 /* ------------------------------------------------------------------ */
 /* Content copied verbatim from non-exported constants / JSX.          */
 /* ------------------------------------------------------------------ */
+
+// Former lib/servicesData.ts (deleted in Phase 7; the frontend now reads Payload).
+type SubCategoryFixture = {
+  name: string;
+  image: string;
+  description: string;
+  equipment?: string[];
+  applications?: string[];
+  conditions?: string[];
+  treatments?: { name: string; desc: string }[];
+  interventions?: { name: string; desc: string }[];
+};
+const servicesData: Record<
+  string,
+  { title: string; subcategories: Record<string, SubCategoryFixture> }
+> = {
+  examens: {
+    title: "Examens Réalisés",
+    subcategories: {
+      acuite: {
+        name: "Acuité Visuelle",
+        image: "/exa1.jpg",
+        description:
+          "Évaluation complète de votre capacité visuelle avec des équipements de précision",
+        equipment: [
+          "Auto-réfractomètre Canon",
+          "Réfracteur automatique Nidek",
+          "Projecteur de tests Nidek",
+          "Frontofocomètre Oculus",
+          "Ophtalmomètre de Javal (Haag-Streit)",
+          "Boîte de verres d'essai complète",
+          "Montures d'essai",
+          "Échelles visuelles Monoyer, Snellen, Pigassou",
+          "Tests optométriques Parinaud",
+        ],
+      },
+      couleurs: {
+        name: "Vision des Couleurs",
+        image: "/exa2.jpg",
+        description: "Dépistage des troubles de perception chromatique",
+        equipment: ["Test d'Ishihara"],
+      },
+      globes: {
+        name: "Globes Oculaires",
+        image: "/exa3.jpg",
+        description:
+          "Exploration approfondie des structures oculaires et dépistage des pathologies",
+        equipment: [
+          "Table élévatrice coulissante Haag Streit",
+          "Biomicroscope 900BQ Haag Streit (LAF)",
+          "Ophtalmoscope direct pour fond d'œil",
+          "Tonomètre - Mesure de la tension oculaire(Glaucome)",
+        ],
+        applications: [
+          "Exploration segment antérieur de l'œil",
+          "Examen de la conjunctive",
+          "Examen de la cornée et du cristallin",
+          "Examen de la rétine et du nerf optique",
+          "Exploration des vaisseaux rétiniens",
+          "Maladies de la choroïde et papilles optiques",
+          "Diagnostic du glaucome",
+        ],
+      },
+    },
+  },
+  pathologies: {
+    title: "Pathologies & Traitements",
+    subcategories: {
+      refraction: {
+        name: "Anomalies de Réfraction",
+        image: "/landscape_img/ls1.jpg",
+        description: "Correction des défauts visuels pour une vision optimale",
+        conditions: ["Myopie", "Hypermétropie", "Astigmatisme", "Presbytie"],
+        treatments: [
+          { name: "Lunettes", desc: "Correction optique sur mesure" },
+          {
+            name: "Lentilles de contact",
+            desc: "Solution discrète et confortable",
+          },
+          {
+            name: "Chirurgie LASIK",
+            desc: "Correction définitive au laser excimer",
+          },
+        ],
+      },
+      maladies: {
+        name: "Maladies des Yeux",
+        image: "/eys-deases.jpg",
+        description:
+          "Prise en charge des affections médicales pouvant affecter votre vision",
+        conditions: [
+          "Strabismes et hétérophories",
+          "Inflammations oculaires",
+          "Infections oculaires",
+          "Troubles du tonus oculaire (glaucomes)",
+          "Rétinopathie diabétique",
+          "Rétinopathie hypertensive",
+          "Cataracte (atteintes séniles)",
+          "Dégénérescence maculaire (DMLA)",
+        ],
+        treatments: [
+          {
+            name: "Traitement Médical",
+            desc: "Collyres, médicaments systémiques",
+          },
+          { name: "Traitement Laser", desc: "Photocoagulation, laser ARGON" },
+          {
+            name: "Traitement Chirurgical",
+            desc: "Interventions spécialisées",
+          },
+        ],
+      },
+    },
+  },
+  chirurgie: {
+    title: "Interventions Chirurgicales",
+    subcategories: {
+      principales: {
+        name: "Chirurgies Principales",
+        image: "/landscape_img/ls2.jpg",
+        description:
+          "Interventions chirurgicales pour restaurer et préserver votre vision",
+        interventions: [
+          { name: "Cataracte", desc: "Remplacement du cristallin opacifié" },
+          { name: "Glaucome", desc: "Réduction de la pression intraoculaire" },
+          { name: "Strabisme", desc: "Correction de l'alignement oculaire" },
+          { name: "LASIK", desc: "Chirurgie réfractive au laser excimer" },
+        ],
+      },
+      annexes: {
+        name: "Chirurgie des Annexes",
+        image: "/surgery.jpg",
+        description: "Interventions sur les structures externes de l'œil",
+        interventions: [
+          { name: "Chalazion", desc: "Excision de kyste palpébral" },
+          {
+            name: "Ptérygion",
+            desc: "Retrait de tissu conjonctival envahissant",
+          },
+        ],
+      },
+    },
+  },
+};
 
 // components/Hero.tsx (slides array + JSX text)
 const heroSlides = [
@@ -87,6 +234,9 @@ const testimonials = [
   { name: "Nadia", text: "Très professionnelle, explications claires et rassurantes." },
   { name: "أمينة", text: "استقبال ممتاز وفحص شامل. أنصح به بشدة.", dir: "rtl" },
   { name: "بلال", text: "طبيب محترف وتوضيحات دقيقة ومطمئنة.", dir: "rtl" },
+  // SAMPLE: placeholder reviews, replace with real ones before launch.
+  { name: "Sami", text: "Rendez-vous rapide et médecin à l’écoute. Examen minutieux et conseils utiles." },
+  { name: "سلمى", text: "طبيب لطيف وصبور، شرح لي كل شيء بوضوح.", dir: "rtl" },
 ] as const;
 
 // components/Biography.tsx (JSX text)
@@ -142,7 +292,7 @@ const siteSettings = {
 };
 
 /* ------------------------------------------------------------------ */
-/* Media: one doc per public/ file, alt from existing alt attributes.  */
+/* Media: one doc per seed-media file, alt from former alt attributes. */
 /* ------------------------------------------------------------------ */
 
 const mediaAlt = new Map<string, string>();
@@ -171,10 +321,19 @@ for (const s of heroSlides) {
 
 const mediaIds = new Map<string, number | string>();
 
+/** Is the stored file actually reachable in the current storage (Blob or local disk)? */
+async function isStored(doc: { url?: string | null; filename?: string | null }) {
+  if (doc.url && /^https?:\/\//.test(doc.url)) {
+    const res = await fetch(doc.url, { method: "HEAD" }).catch(() => null);
+    return Boolean(res?.ok);
+  }
+  return Boolean(doc.filename && fs.existsSync(path.resolve(process.cwd(), "media", doc.filename)));
+}
+
 async function upsertMedia(payload: Payload, file: string, alt: string) {
-  const filePath = path.join(PUBLIC_DIR, file);
+  const filePath = path.join(SEED_MEDIA_DIR, file);
   if (!fs.existsSync(filePath)) {
-    notMapped.push(`${file}: file missing in public/`);
+    notMapped.push(`${file}: file missing in scripts/seed-media/`);
     return;
   }
   const filename = path.basename(file);
@@ -184,15 +343,19 @@ async function upsertMedia(payload: Payload, file: string, alt: string) {
     limit: 1,
     depth: 0,
   });
-  if (existing.docs[0]) {
+  const current = existing.docs[0];
+  if (current) {
+    const reupload = !(await isStored(current));
     const doc = await payload.update({
       collection: "media",
-      id: existing.docs[0].id,
+      id: current.id,
       data: { alt },
       depth: 0,
+      // Keep the same filename so later runs still match on it.
+      ...(reupload ? { filePath, overwriteExistingFiles: true } : {}),
     });
     mediaIds.set(file, doc.id);
-    bump("media", "updated");
+    bump("media", reupload ? "reuploaded" : "updated");
   } else {
     const doc = await payload.create({ collection: "media", data: { alt }, filePath, depth: 0 });
     mediaIds.set(file, doc.id);
@@ -322,9 +485,9 @@ async function seed() {
 
   // Report
   console.log("\nSeed done.\n");
-  console.log("Run results (created / updated):");
+  console.log("Run results (created / updated / file re-uploaded):");
   for (const [key, s] of Object.entries(stats)) {
-    console.log(`  ${key.padEnd(24)} ${s.created} / ${s.updated}`);
+    console.log(`  ${key.padEnd(24)} ${s.created} / ${s.updated} / ${s.reuploaded}`);
   }
   console.log("\nTotals in database:");
   for (const collection of ["media", "service-categories", "testimonials"] as const) {

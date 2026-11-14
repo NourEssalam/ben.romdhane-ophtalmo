@@ -1,11 +1,13 @@
 import type { GlobalConfig } from "payload";
 import { anyone, authenticated } from "../access";
+import { HOME, globalRevalidate } from "../lib/revalidate";
 
 export const Hero: GlobalConfig = {
   slug: "hero",
   label: "Bandeau d’accueil",
   admin: { group: "Contenu" },
   access: { read: anyone, update: authenticated },
+  hooks: globalRevalidate(HOME),
   fields: [
     {
       name: "slides",

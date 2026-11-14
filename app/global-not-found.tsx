@@ -8,19 +8,25 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactFooter from "@/components/ContactFooter";
 import NotFound from "./(frontend)/not-found";
+import { getGlobal, getServiceCategories, toServiceLinks } from "@/lib/payload";
 
 export const metadata: Metadata = {
   title: "Page introuvable | Dr Brahim Ben Romdhane",
   description: "La page que vous recherchez n'existe pas ou a été déplacée.",
 };
 
-export default function GlobalNotFound() {
+export default async function GlobalNotFound() {
+  const [categories, contact] = await Promise.all([
+    getServiceCategories(),
+    getGlobal("contact"),
+  ]);
+
   return (
     <html lang="fr">
       <body className="font-sans antialiased">
-        <Header />
+        <Header services={toServiceLinks(categories)} />
         <NotFound />
-        <ContactFooter />
+        <ContactFooter contact={contact} />
         <Footer />
       </body>
     </html>

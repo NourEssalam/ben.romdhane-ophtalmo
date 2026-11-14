@@ -1,5 +1,6 @@
 import type { CollectionConfig, Field } from "payload";
 import { anyone, authenticated } from "../access";
+import { ALL_PAGES, collectionRevalidate } from "../lib/revalidate";
 
 /** A reorderable list of single-line strings, stored as [{ item }]. */
 const stringList = (name: string, label: string, itemLabel: string): Field => ({
@@ -37,6 +38,7 @@ export const ServiceCategories: CollectionConfig = {
     update: authenticated,
     delete: authenticated,
   },
+  hooks: collectionRevalidate(ALL_PAGES),
   fields: [
     {
       name: "slug",

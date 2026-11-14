@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:prod": "payload migrate && next build",
     "start": "next start",
     "lint": "eslint .",
     "payload": "payload",
@@ -20,6 +21,7 @@
     "@payloadcms/db-postgres": "3.93.0",
     "@payloadcms/next": "3.93.0",
     "@payloadcms/richtext-lexical": "3.93.0",
+    "@payloadcms/storage-vercel-blob": "3.93.0",
     "@payloadcms/ui": "3.93.0",
     "graphql": "16.15.0",
     "lucide-react": "^0.552.0",

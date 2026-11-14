@@ -3,24 +3,29 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactFooter from "@/components/ContactFooter";
+import { getGlobal, getServiceCategories, toServiceLinks } from "@/lib/payload";
 
-export const metadata: Metadata = {
-  title: "Dr Brahim Ben Romdhane | Ophtalmologiste à Mahdia",
-  description:
-    "Cabinet d'ophtalmologie à Mahdia: examens, traitements, chirurgie, et suivi visuel.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { title, description } = await getGlobal("site-settings");
+  return { title, description };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [categories, contact] = await Promise.all([
+    getServiceCategories(),
+    getGlobal("contact"),
+  ]);
+
   return (
     <html lang="fr">
       <body className="font-sans antialiased">
-        <Header />
+        <Header services={toServiceLinks(categories)} />
         {children}
-        <ContactFooter />
+        <ContactFooter contact={contact} />
         <Footer />
       </body>
     </html>

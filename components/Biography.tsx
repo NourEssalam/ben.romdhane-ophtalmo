@@ -1,16 +1,17 @@
-"use client";
 import Image from "next/image";
-import { useState } from "react";
-import {
-  GraduationCap,
-  Building2,
-  Award,
-  Stethoscope,
-  ChevronDown,
-} from "lucide-react";
+import { GraduationCap, Building2, Award, Stethoscope } from "lucide-react";
+import BiographyDetails from "./BiographyDetails";
+import type { Biography as BiographyData } from "../payload-types";
 
-export default function Biography() {
-  const [isExpanded, setIsExpanded] = useState(false);
+export default function Biography({
+  data,
+  photo,
+}: {
+  data: BiographyData;
+  photo: { src: string; alt: string } | null;
+}) {
+  const experienceItems = data.experience?.items ?? [];
+  const diplomaItems = data.diplomas?.items ?? [];
 
   return (
     <section
@@ -33,18 +34,22 @@ export default function Biography() {
             {/* Left Column - Image */}
             <div className="lg:col-span-4">
               <div className="relative h-48 sm:h-56 lg:h-72 rounded-xl overflow-hidden shadow-md">
-                <Image
-                  src="/docteur.jpg"
-                  alt="Docteur Ophtalmologue"
-                  fill
-                  className="object-cover"
-                />
+                {photo && (
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    className="object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <p className="text-xs sm:text-sm font-medium bg-brand/90 backdrop-blur-sm px-3 py-1.5 rounded-lg inline-block">
-                    En exercice depuis 1990
-                  </p>
-                </div>
+                {data.badge && (
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <p className="text-xs sm:text-sm font-medium bg-brand/90 backdrop-blur-sm px-3 py-1.5 rounded-lg inline-block">
+                      {data.badge}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -56,32 +61,31 @@ export default function Biography() {
                   <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6 text-brand flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
-                      Médecin Spécialiste en Ophtalmologie
+                      {data.headline}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-600">
-                      Formation internationale et expérience hospitalière
-                    </p>
+                    {data.headlineSubtitle && (
+                      <p className="text-xs sm:text-sm text-slate-600">
+                        {data.headlineSubtitle}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
 
-              {/* Collapsible Content */}
-              <div
-                className={`space-y-4 sm:space-y-5 transition-all duration-500 ${
-                  !isExpanded ? "max-sm:hidden" : ""
-                }`}
-              >
-                {/* Education - Paris VI */}
+              <BiographyDetails>
+                {/* Education */}
                 <div className="bg-blue-50/50 rounded-lg p-4">
                   <div className="flex items-start gap-3">
                     <GraduationCap className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-sm sm:text-base text-slate-900">
-                        Université Pierre et Marie Curie (Paris VI)
+                        {data.education?.institution}
                       </h4>
-                      <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                        Diplôme en Ophtalmologie
-                      </p>
+                      {data.education?.diploma && (
+                        <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                          {data.education.diploma}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -91,31 +95,19 @@ export default function Biography() {
                   <div className="flex items-start gap-3 mb-3">
                     <Building2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
                     <h4 className="font-semibold text-sm sm:text-base text-slate-900">
-                      Parcours Professionnel
+                      {data.experience?.title}
                     </h4>
                   </div>
                   <ul className="space-y-2 ml-8">
-                    <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" />
-                      <span>
-                        Médecin ophtalmologue au centre universitaire Tahar Sfar
-                        à Mahdia
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" />
-                      <span>
-                        Cabinet libéral en ophtalmologie à Ksar-Hellal (jusqu’en
-                        2018)
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" />
-                      <span>
-                        Cabinet d’ophtalmologie à Mahdia - Complexe médical
-                        EMNA, avenue 02 mars 1934
-                      </span>
-                    </li>
+                    {experienceItems.map((entry, i) => (
+                      <li
+                        key={entry.id ?? i}
+                        className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" />
+                        <span>{entry.item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
@@ -125,48 +117,28 @@ export default function Biography() {
                     <Award className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-sm sm:text-base text-slate-900">
-                        Diplômes Complémentaires
+                        {data.diplomas?.title}
                       </h4>
-                      <p className="text-xs text-slate-600 mt-0.5">
-                        Université René Descartes (Paris V)
-                      </p>
+                      {data.diplomas?.institution && (
+                        <p className="text-xs text-slate-600 mt-0.5">
+                          {data.diplomas.institution}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <ul className="space-y-1.5 ml-8">
-                    <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0 mt-1.5" />
-                      <span>
-                        Médecine aéronautique (Faculté des Saints Pères)
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0 mt-1.5" />
-                      <span>Pédiatrie préventive</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0 mt-1.5" />
-                      <span>Pédiatrie et puériculture</span>
-                    </li>
+                    {diplomaItems.map((entry, i) => (
+                      <li
+                        key={entry.id ?? i}
+                        className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0 mt-1.5" />
+                        <span>{entry.item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
-              </div>
-
-              {/* Mobile Toggle Button */}
-              <div className="sm:hidden text-center pt-2">
-                <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className="inline-flex items-center gap-2 text-brand font-semibold text-sm hover:text-brand-dark transition-colors"
-                >
-                  <span>
-                    {isExpanded ? "Voir moins" : "Voir plus de détails"}
-                  </span>
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      isExpanded ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-              </div>
+              </BiographyDetails>
             </div>
           </div>
         </div>

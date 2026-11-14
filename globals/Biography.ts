@@ -1,5 +1,6 @@
 import type { Field, GlobalConfig } from "payload";
 import { anyone, authenticated } from "../access";
+import { HOME, globalRevalidate } from "../lib/revalidate";
 
 const items: Field = {
   name: "items",
@@ -14,6 +15,7 @@ export const Biography: GlobalConfig = {
   label: "Biographie",
   admin: { group: "Contenu" },
   access: { read: anyone, update: authenticated },
+  hooks: globalRevalidate(HOME),
   fields: [
     { name: "photo", label: "Photo du docteur", type: "upload", relationTo: "media" },
     { name: "badge", label: "Badge sur la photo", type: "text" },

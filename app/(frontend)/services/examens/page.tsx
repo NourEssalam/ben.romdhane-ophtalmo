@@ -1,11 +1,14 @@
-"use client";
 import Image from "next/image";
-import { servicesData } from "@/lib/servicesData";
+import { notFound } from "next/navigation";
+import { categoryIcons } from "@/components/icons";
+import { getServiceCategory, toSubcategories } from "@/lib/payload";
 import { ChevronRight } from "lucide-react";
 
-export default function ExamensPage() {
-  const category = servicesData.examens;
-  const Icon = category.icon;
+export default async function ExamensPage() {
+  const category = await getServiceCategory("examens");
+  if (!category) notFound();
+  const Icon = categoryIcons[category.icon];
+  const subcategories = toSubcategories(category);
 
   return (
     <main>
@@ -19,22 +22,24 @@ export default function ExamensPage() {
               {category.title}
             </h1>
             <p className="mt-1 text-slate-600">
-              Équipements de pointe pour un diagnostic précis
+              {category.subtitle}
             </p>
           </div>
         </div>
       </header>
 
       <div className="space-y-8">
-        {Object.entries(category.subcategories).map(([key, sub]) => (
-            <article key={key} className="card overflow-hidden">
+        {subcategories.map((sub) => (
+            <article key={sub.key} className="card overflow-hidden">
               <div className="relative h-64 sm:h-80 overflow-hidden">
-                <Image
-                  src={sub.image}
-                  alt={sub.name}
-                  fill
-                  className="object-cover"
-                />
+                {sub.image && (
+                  <Image
+                    src={sub.image.src}
+                    alt={sub.image.alt}
+                    fill
+                    className="object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
                   <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
