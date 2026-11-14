@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
+import type { ServiceLink } from "./icons";
 
 const sections = [
   { id: "accueil", label: "Accueil" },
@@ -11,7 +12,7 @@ const sections = [
   { id: "contact", label: "Contact" },
 ];
 
-export default function Header() {
+export default function Header({ services }: { services: ServiceLink[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
@@ -95,27 +96,16 @@ export default function Header() {
                 {/* Invisible bridge area to prevent gap */}
                 <div className="h-2 w-full" />
                 <div className="card p-2 shadow-lg">
-                  <Link 
-                    href="/services/examens" 
-                    className="block px-3 py-2 rounded hover:bg-slate-100 text-slate-700 transition-colors"
-                    onClick={() => setServicesDropdownOpen(false)}
-                  >
-                    Examens Réalisés
-                  </Link>
-                  <Link 
-                    href="/services/pathologies" 
-                    className="block px-3 py-2 rounded hover:bg-slate-100 text-slate-700 transition-colors"
-                    onClick={() => setServicesDropdownOpen(false)}
-                  >
-                    Pathologies & Traitements
-                  </Link>
-                  <Link 
-                    href="/services/interventions" 
-                    className="block px-3 py-2 rounded hover:bg-slate-100 text-slate-700 transition-colors"
-                    onClick={() => setServicesDropdownOpen(false)}
-                  >
-                    Interventions Chirurgicales
-                  </Link>
+                  {services.map((service) => (
+                    <Link
+                      key={service.slug}
+                      href={service.href}
+                      className="block px-3 py-2 rounded hover:bg-slate-100 text-slate-700 transition-colors"
+                      onClick={() => setServicesDropdownOpen(false)}
+                    >
+                      {service.label}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
@@ -204,36 +194,19 @@ export default function Header() {
                     }`}
                   >
                     <div className="pl-4 pb-2 space-y-1">
-                      <Link
-                        href="/services/examens"
-                        onClick={() => {
-                          setMobileServicesOpen(false);
-                          setMobileMenuOpen(false);
-                        }}
-                        className="block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-brand hover:bg-slate-50 transition-colors"
-                      >
-                        Examens Réalisés
-                      </Link>
-                      <Link
-                        href="/services/pathologies"
-                        onClick={() => {
-                          setMobileServicesOpen(false);
-                          setMobileMenuOpen(false);
-                        }}
-                        className="block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-brand hover:bg-slate-50 transition-colors"
-                      >
-                        Pathologies & Traitements
-                      </Link>
-                      <Link
-                        href="/services/interventions"
-                        onClick={() => {
-                          setMobileServicesOpen(false);
-                          setMobileMenuOpen(false);
-                        }}
-                        className="block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-brand hover:bg-slate-50 transition-colors"
-                      >
-                        Interventions Chirurgicales
-                      </Link>
+                      {services.map((service) => (
+                        <Link
+                          key={service.slug}
+                          href={service.href}
+                          onClick={() => {
+                            setMobileServicesOpen(false);
+                            setMobileMenuOpen(false);
+                          }}
+                          className="block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-brand hover:bg-slate-50 transition-colors"
+                        >
+                          {service.label}
+                        </Link>
+                      ))}
                     </div>
                   </div>
                 </div>

@@ -1,24 +1,12 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 
-interface Review {
+export interface Review {
+  id: number | string;
   name: string;
   text: string;
-  dir?: string;
+  dir?: "ltr" | "rtl";
 }
-
-const reviews: Review[] = [
-  {
-    name: "Aymen",
-    text: "Accueil chaleureux et examen très complet. Je recommande vivement !",
-  },
-  {
-    name: "Nadia",
-    text: "Très professionnelle, explications claires et rassurantes.",
-  },
-  { name: "أمينة", text: "استقبال ممتاز وفحص شامل. أنصح به بشدة.", dir: "rtl" },
-  { name: "بلال", text: "طبيب محترف وتوضيحات دقيقة ومطمئنة.", dir: "rtl" },
-];
 
 function chunkReviews(reviews: Review[], reviewsPerSlide: number) {
   let result: Review[][] = [];
@@ -28,7 +16,7 @@ function chunkReviews(reviews: Review[], reviewsPerSlide: number) {
   return result;
 }
 
-export default function Testimonials() {
+export default function Testimonials({ reviews }: { reviews: Review[] }) {
   const [reviewsPerSlide, setReviewsPerSlide] = useState(1);
 
   useEffect(() => {
@@ -44,7 +32,7 @@ export default function Testimonials() {
 
   const slides = useMemo(
     () => chunkReviews(reviews, reviewsPerSlide),
-    [reviewsPerSlide]
+    [reviews, reviewsPerSlide]
   );
   const [index, setIndex] = useState(0);
 
@@ -124,9 +112,9 @@ export default function Testimonials() {
             >
               {slides.map((slideReviews, slideIdx) => (
                 <div key={slideIdx} className="min-w-full flex gap-4 sm:gap-6">
-                  {slideReviews.map((review, reviewIdx) => (
+                  {slideReviews.map((review) => (
                     <blockquote
-                      key={review.name + reviewIdx}
+                      key={review.id}
                       className="flex-1 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 sm:p-8 border border-slate-100"
                       dir={review.dir || "ltr"}
                     >
