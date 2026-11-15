@@ -1,0 +1,69 @@
+{
+  "Header": {
+    "home": "Accueil",
+    "services": "Services",
+    "biography": "Biographie",
+    "testimonials": "Témoignages",
+    "contact": "Contact",
+    "toggleMenu": "Ouvrir ou fermer le menu"
+  },
+  "LocaleSwitcher": {
+    "label": "Langue"
+  },
+  "Logo": {
+    "alt": "Logo Dr B. Ben Romdhane",
+    "specialty": "Ophtalmologiste"
+  },
+  "Footer": {
+    "specialty": "Ophtalmologiste",
+    "location": "Mahdia, Tunisie"
+  },
+  "Contact": {
+    "title": "Contact & Informations",
+    "address": "Adresse :",
+    "landmark": "Repérage :",
+    "phone": "Téléphone :",
+    "email": "Email :",
+    "hours": "Horaires :",
+    "mapTitle": "Plan d’accès au cabinet"
+  },
+  "Hero": {
+    "goToSlide": "Aller à l’image {number}"
+  },
+  "Services": {
+    "title": "Nos Services Ophtalmologiques",
+    "intro": "Des équipements performants et une expertise reconnue pour diagnostiquer et traiter la grande majorité des problèmes oculaires.",
+    "ctaQuestion": "Besoin d’un examen ou d’une consultation ?",
+    "ctaButton": "Prendre rendez-vous",
+    "learnMore": "En savoir plus",
+    "showAll": "Voir tous les services",
+    "showLess": "Voir moins",
+    "navTitle": "Nos Services"
+  },
+  "ServicePages": {
+    "equipment": "Équipements Utilisés",
+    "applications": "Applications Cliniques",
+    "conditions": "Pathologies Traitées",
+    "treatments": "Solutions Thérapeutiques",
+    "interventions": "Interventions Proposées"
+  },
+  "Biography": {
+    "title": "À Propos du Docteur",
+    "subtitle": "Longue expérience en ophtalmologie",
+    "showMore": "Voir plus de détails",
+    "showLess": "Voir moins"
+  },
+  "Testimonials": {
+    "title": "Témoignages",
+    "subtitle": "Quelques avis de nos patients",
+    "previous": "Témoignage précédent",
+    "next": "Témoignage suivant",
+    "goTo": "Aller au témoignage {number}"
+  },
+  "NotFound": {
+    "code": "Erreur 404",
+    "title": "Page introuvable",
+    "text": "La page que vous recherchez n’existe pas ou a été déplacée.",
+    "back": "Retour à l’accueil"
+  }
+}

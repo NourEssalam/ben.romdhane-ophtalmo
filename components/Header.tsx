@@ -1,18 +1,21 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import LocaleSwitcher from "./LocaleSwitcher";
 import Logo from "./Logo";
 import type { ServiceLink } from "./icons";
 
 const sections = [
-  { id: "accueil", label: "Accueil" },
-  { id: "services", label: "Services" },
-  { id: "biographie", label: "Biographie" },
-  { id: "temoignages", label: "Témoignages" },
-  { id: "contact", label: "Contact" },
-];
+  { id: "accueil", key: "home" },
+  { id: "services", key: "services" },
+  { id: "biographie", key: "biography" },
+  { id: "temoignages", key: "testimonials" },
+  { id: "contact", key: "contact" },
+] as const;
 
 export default function Header({ services }: { services: ServiceLink[] }) {
+  const t = useTranslations("Header");
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
@@ -81,14 +84,14 @@ export default function Header({ services }: { services: ServiceLink[] }) {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            <Link href="/" className="text-slate-700 hover:text-brand transition-colors duration-200">Accueil</Link>
+            <Link href="/" className="text-slate-700 hover:text-brand transition-colors duration-200">{t("home")}</Link>
             <div 
               className="relative"
               onMouseEnter={() => setServicesDropdownOpen(true)}
               onMouseLeave={() => setServicesDropdownOpen(false)}
             >
               <button className="text-slate-700 hover:text-brand transition-colors duration-200 cursor-pointer">
-                Services
+                {t("services")}
               </button>
               <div className={`absolute left-0 top-full w-72 z-50 transition-all duration-200 ${
                 servicesDropdownOpen ? 'visible opacity-100' : 'invisible opacity-0'
@@ -109,16 +112,17 @@ export default function Header({ services }: { services: ServiceLink[] }) {
                 </div>
               </div>
             </div>
-            <Link href="/#biographie" className="text-slate-700 hover:text-brand transition-colors duration-200">Biographie</Link>
-            <Link href="/#temoignages" className="text-slate-700 hover:text-brand transition-colors duration-200">Témoignages</Link>
-            <Link href="#contact" className="text-slate-700 hover:text-brand transition-colors duration-200">Contact</Link>
+            <Link href={{ pathname: "/", hash: "biographie" }} className="text-slate-700 hover:text-brand transition-colors duration-200">{t("biography")}</Link>
+            <Link href={{ pathname: "/", hash: "temoignages" }} className="text-slate-700 hover:text-brand transition-colors duration-200">{t("testimonials")}</Link>
+            <a href="#contact" className="text-slate-700 hover:text-brand transition-colors duration-200">{t("contact")}</a>
+            <LocaleSwitcher />
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors duration-200 relative z-50"
-            aria-label="Toggle menu"
+            aria-label={t("toggleMenu")}
             aria-expanded={mobileMenuOpen}
           >
             <svg
@@ -173,7 +177,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
                       animationDelay: `${index * 50}ms`,
                     }}
                   >
-                    <span>{s.label}</span>
+                    <span>{t(s.key)}</span>
                     <svg
                       className={`w-5 h-5 transition-transform duration-200 ${
                         mobileServicesOpen ? "rotate-180" : ""
@@ -212,29 +216,42 @@ export default function Header({ services }: { services: ServiceLink[] }) {
                 </div>
               );
             }
-            const targetHref = s.id === "accueil" ? "/" : (s.id === "contact" ? `#${s.id}` : `/#${s.id}`);
-            const isAnchorHere = targetHref.startsWith('#');
-            return (
+            // Contact is on every page (same-page anchor); other sections live on home.
+            const isAnchorHere = s.id === "contact";
+            const targetHref = s.id === "accueil" ? "/" : { pathname: "/", hash: s.id };
+            return isAnchorHere ? (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                onClick={(e) => handleLinkClick(e, s.id)}
+                className="text-lg font-medium text-slate-700 hover:text-brand hover:bg-slate-50 transition-all duration-200 py-4 px-4 rounded-lg border-b border-slate-100 last:border-b-0"
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                }}
+              >
+                {t(s.key)}
+              </a>
+            ) : (
               <Link
                 key={s.id}
                 href={targetHref}
-                onClick={(e) => {
-                  if (isAnchorHere) handleLinkClick(e, s.id);
-                  else {
-                    // closing menu for navigation to home sections
-                    setMobileMenuOpen(false);
-                    setMobileServicesOpen(false);
-                  }
+                onClick={() => {
+                  // closing menu for navigation to home sections
+                  setMobileMenuOpen(false);
+                  setMobileServicesOpen(false);
                 }}
                 className="text-lg font-medium text-slate-700 hover:text-brand hover:bg-slate-50 transition-all duration-200 py-4 px-4 rounded-lg border-b border-slate-100 last:border-b-0"
                 style={{
                   animationDelay: `${index * 50}ms`,
                 }}
               >
-                {s.label}
+                {t(s.key)}
               </Link>
             );
           })}
+          <div className="pt-4 px-4">
+            <LocaleSwitcher className="w-full py-2 text-base" />
+          </div>
         </nav>
       </div>
     </>

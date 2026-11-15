@@ -1,0 +1,69 @@
+{
+  "Header": {
+    "home": "Startseite",
+    "services": "Leistungen",
+    "biography": "Biografie",
+    "testimonials": "Erfahrungsberichte",
+    "contact": "Kontakt",
+    "toggleMenu": "Menü öffnen oder schließen"
+  },
+  "LocaleSwitcher": {
+    "label": "Sprache"
+  },
+  "Logo": {
+    "alt": "Logo Dr. B. Ben Romdhane",
+    "specialty": "Augenarzt"
+  },
+  "Footer": {
+    "specialty": "Augenarzt",
+    "location": "Mahdia, Tunesien"
+  },
+  "Contact": {
+    "title": "Kontakt & Informationen",
+    "address": "Adresse:",
+    "landmark": "Orientierungspunkt:",
+    "phone": "Telefon:",
+    "email": "E-Mail:",
+    "hours": "Sprechzeiten:",
+    "mapTitle": "Anfahrtskarte zur Praxis"
+  },
+  "Hero": {
+    "goToSlide": "Zu Bild {number}"
+  },
+  "Services": {
+    "title": "Unsere augenärztlichen Leistungen",
+    "intro": "Leistungsstarke Geräte und anerkannte Expertise, um die große Mehrheit der Augenerkrankungen zu diagnostizieren und zu behandeln.",
+    "ctaQuestion": "Benötigen Sie eine Untersuchung oder Beratung?",
+    "ctaButton": "Termin vereinbaren",
+    "learnMore": "Mehr erfahren",
+    "showAll": "Alle Leistungen anzeigen",
+    "showLess": "Weniger anzeigen",
+    "navTitle": "Unsere Leistungen"
+  },
+  "ServicePages": {
+    "equipment": "Eingesetzte Geräte",
+    "applications": "Klinische Anwendungen",
+    "conditions": "Behandelte Erkrankungen",
+    "treatments": "Therapeutische Lösungen",
+    "interventions": "Angebotene Eingriffe"
+  },
+  "Biography": {
+    "title": "Über den Arzt",
+    "subtitle": "Langjährige Erfahrung in der Augenheilkunde",
+    "showMore": "Mehr Details anzeigen",
+    "showLess": "Weniger anzeigen"
+  },
+  "Testimonials": {
+    "title": "Erfahrungsberichte",
+    "subtitle": "Einige Bewertungen unserer Patienten",
+    "previous": "Vorheriger Erfahrungsbericht",
+    "next": "Nächster Erfahrungsbericht",
+    "goTo": "Zu Erfahrungsbericht {number}"
+  },
+  "NotFound": {
+    "code": "Fehler 404",
+    "title": "Seite nicht gefunden",
+    "text": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "back": "Zurück zur Startseite"
+  }
+}

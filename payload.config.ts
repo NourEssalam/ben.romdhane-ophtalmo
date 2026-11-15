@@ -7,6 +7,7 @@ import type { CollectionConfig } from "payload";
 import { fr } from "payload/i18n/fr";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
+import { defaultLocale, localeNames, locales } from "./i18n/locales";
 
 import { Media } from "./collections/Media";
 import { ServiceCategories } from "./collections/ServiceCategories";
@@ -40,6 +41,13 @@ export default buildConfig({
   },
   collections: [ServiceCategories, Testimonials, Media, Users],
   globals: [Hero, Biography, Contact, SiteSettings],
+  // Content languages: fields marked `localized: true` store one value per locale.
+  // Empty translations fall back to French.
+  localization: {
+    locales: locales.map((code) => ({ code, label: localeNames[code], rtl: code === "ar" })),
+    defaultLocale,
+    fallback: true,
+  },
   i18n: {
     supportedLanguages: { fr },
     fallbackLanguage: "fr",

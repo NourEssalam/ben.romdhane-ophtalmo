@@ -14,12 +14,14 @@ export const SiteSettings: GlobalConfig = {
       label: "Titre du site (SEO)",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "description",
       label: "Description du site (SEO)",
       type: "textarea",
       required: true,
+      localized: true,
     },
   ],
 };

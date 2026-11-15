@@ -22,9 +22,10 @@ export const Media: CollectionConfig = {
   fields: [
     {
       name: "alt",
-      label: "Texte alternatif (français)",
+      label: "Texte alternatif",
       type: "text",
       required: true,
+      localized: true,
       admin: {
         description: "Décrit l’image pour l’accessibilité et le référencement.",
       },

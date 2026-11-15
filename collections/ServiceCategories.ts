@@ -8,7 +8,7 @@ const stringList = (name: string, label: string, itemLabel: string): Field => ({
   label,
   type: "array",
   labels: { singular: itemLabel, plural: label },
-  fields: [{ name: "item", label: itemLabel, type: "text", required: true }],
+  fields: [{ name: "item", label: itemLabel, type: "text", required: true, localized: true }],
 });
 
 /** A list of { name, desc } pairs (treatments, interventions). */
@@ -18,8 +18,8 @@ const nameDescList = (name: string, label: string, itemLabel: string): Field => 
   type: "array",
   labels: { singular: itemLabel, plural: label },
   fields: [
-    { name: "name", label: "Nom", type: "text", required: true },
-    { name: "desc", label: "Description", type: "text", required: true },
+    { name: "name", label: "Nom", type: "text", required: true, localized: true },
+    { name: "desc", label: "Description", type: "text", required: true, localized: true },
   ],
 });
 
@@ -73,18 +73,19 @@ export const ServiceCategories: CollectionConfig = {
       ],
       admin: { position: "sidebar" },
     },
-    { name: "title", label: "Titre", type: "text", required: true },
+    { name: "title", label: "Titre", type: "text", required: true, localized: true },
     {
       name: "subtitle",
       label: "Sous-titre de la page",
       type: "text",
+      localized: true,
     },
     {
       name: "card",
       label: "Carte sur la page d’accueil",
       type: "group",
       fields: [
-        { name: "description", label: "Description", type: "textarea" },
+        { name: "description", label: "Description", type: "textarea", localized: true },
         { name: "image", label: "Image", type: "upload", relationTo: "media" },
         stringList("features", "Points clés", "Point clé"),
       ],
@@ -105,7 +106,7 @@ export const ServiceCategories: CollectionConfig = {
           required: true,
           admin: { description: "Ex. : acuite, couleurs, globes. Sans espaces ni accents." },
         },
-        { name: "name", label: "Nom", type: "text", required: true },
+        { name: "name", label: "Nom", type: "text", required: true, localized: true },
         {
           name: "image",
           label: "Image",
@@ -113,7 +114,7 @@ export const ServiceCategories: CollectionConfig = {
           relationTo: "media",
           required: true,
         },
-        { name: "description", label: "Description", type: "textarea", required: true },
+        { name: "description", label: "Description", type: "textarea", required: true, localized: true },
         stringList("equipment", "Équipements", "Équipement"),
         stringList("applications", "Applications", "Application"),
         stringList("conditions", "Pathologies traitées", "Pathologie"),

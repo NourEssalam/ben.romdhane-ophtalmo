@@ -1,0 +1,69 @@
+{
+  "Header": {
+    "home": "Home",
+    "services": "Services",
+    "biography": "Biography",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "toggleMenu": "Toggle menu"
+  },
+  "LocaleSwitcher": {
+    "label": "Language"
+  },
+  "Logo": {
+    "alt": "Dr B. Ben Romdhane logo",
+    "specialty": "Ophthalmologist"
+  },
+  "Footer": {
+    "specialty": "Ophthalmologist",
+    "location": "Mahdia, Tunisia"
+  },
+  "Contact": {
+    "title": "Contact & Information",
+    "address": "Address:",
+    "landmark": "Landmark:",
+    "phone": "Phone:",
+    "email": "Email:",
+    "hours": "Opening hours:",
+    "mapTitle": "Map to the practice"
+  },
+  "Hero": {
+    "goToSlide": "Go to slide {number}"
+  },
+  "Services": {
+    "title": "Our Ophthalmology Services",
+    "intro": "High-performance equipment and recognised expertise to diagnose and treat the vast majority of eye problems.",
+    "ctaQuestion": "Need an eye exam or a consultation?",
+    "ctaButton": "Book an appointment",
+    "learnMore": "Learn more",
+    "showAll": "Show all services",
+    "showLess": "Show less",
+    "navTitle": "Our Services"
+  },
+  "ServicePages": {
+    "equipment": "Equipment Used",
+    "applications": "Clinical Applications",
+    "conditions": "Conditions Treated",
+    "treatments": "Treatment Options",
+    "interventions": "Procedures Offered"
+  },
+  "Biography": {
+    "title": "About the Doctor",
+    "subtitle": "Extensive experience in ophthalmology",
+    "showMore": "Show more details",
+    "showLess": "Show less"
+  },
+  "Testimonials": {
+    "title": "Testimonials",
+    "subtitle": "A few reviews from our patients",
+    "previous": "Previous testimonial",
+    "next": "Next testimonial",
+    "goTo": "Go to testimonial {number}"
+  },
+  "NotFound": {
+    "code": "Error 404",
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist or has been moved.",
+    "back": "Back to home"
+  }
+}

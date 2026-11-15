@@ -2,10 +2,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { categoryIcons } from "@/components/icons";
 import { getServiceCategory, toSubcategories } from "@/lib/payload";
-import { Eye } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { initLocale, type LocaleParams } from "@/i18n/locale";
 
-export default async function PathologiesPage() {
-  const category = await getServiceCategory("pathologies");
+export default async function InterventionsPage({ params }: LocaleParams) {
+  const locale = await initLocale(params); // before getTranslations: keeps the page static
+  const t = await getTranslations("ServicePages");
+  const category = await getServiceCategory("interventions", locale);
   if (!category) notFound();
   const Icon = categoryIcons[category.icon];
   const subcategories = toSubcategories(category);
@@ -52,44 +55,23 @@ export default async function PathologiesPage() {
             </div>
 
             <div className="p-6 sm:p-8">
-              {sub.conditions && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <div className="w-1 h-6 rounded bg-brand" />
-                    Pathologies Traitées
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {sub.conditions.map((cond, i) => (
-                      <span
-                        key={i}
-                        className="px-4 py-2 rounded-full text-sm font-medium bg-brand-light text-brand border border-brand/20"
-                      >
-                        {cond}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {sub.treatments && (
+              {sub.interventions && (
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <div className="w-1 h-6 rounded bg-brand" />
-                    Solutions Thérapeutiques
+                    {t("interventions")}
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {sub.treatments.map((t, i) => (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {sub.interventions.map((it, i) => (
                       <div
                         key={i}
-                        className="p-4 rounded-xl bg-brand-light/50 border border-brand/20 hover:shadow-md transition-shadow"
+                        className="p-5 bg-slate-50 rounded-xl border-2 border-slate-200 hover:border-brand/30 transition-colors"
                       >
-                        <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-3 bg-brand text-white">
-                          <Eye className="w-5 h-5" />
-                        </div>
-                        <h4 className="font-bold text-base text-slate-900 mb-1">
-                          {t.name}
+                        <h4 className="font-bold text-base text-slate-900 mb-2 flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-brand" />
+                          {it.name}
                         </h4>
-                        <p className="text-sm text-slate-600">{t.desc}</p>
+                        <p className="text-sm text-slate-600">{it.desc}</p>
                       </div>
                     ))}
                   </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { GraduationCap, Building2, Award, Stethoscope } from "lucide-react";
+import { useTranslations } from "next-intl";
 import BiographyDetails from "./BiographyDetails";
 import type { Biography as BiographyData } from "../payload-types";
 
@@ -10,6 +11,7 @@ export default function Biography({
   data: BiographyData;
   photo: { src: string; alt: string } | null;
 }) {
+  const t = useTranslations("Biography");
   const experienceItems = data.experience?.items ?? [];
   const diplomaItems = data.diplomas?.items ?? [];
 
@@ -22,10 +24,10 @@ export default function Biography({
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2">
-            À Propos du Docteur
+            {t("title")}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600">
-            Longue expérience en ophtalmologie
+            {t("subtitle")}
           </p>
         </div>
 

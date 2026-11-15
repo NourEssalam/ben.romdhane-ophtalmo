@@ -9,9 +9,9 @@ export const Contact: GlobalConfig = {
   access: { read: anyone, update: authenticated },
   hooks: globalRevalidate(ALL_PAGES),
   fields: [
-    { name: "intro", label: "Texte d’introduction", type: "textarea" },
-    { name: "address", label: "Adresse", type: "text" },
-    { name: "landmark", label: "Repérage", type: "text" },
+    { name: "intro", label: "Texte d’introduction", type: "textarea", localized: true },
+    { name: "address", label: "Adresse", type: "text", localized: true },
+    { name: "landmark", label: "Repérage", type: "text", localized: true },
     {
       name: "phones",
       label: "Téléphones",
@@ -35,7 +35,7 @@ export const Contact: GlobalConfig = {
       ],
     },
     { name: "email", label: "E-mail", type: "email" },
-    { name: "hours", label: "Horaires", type: "text" },
+    { name: "hours", label: "Horaires", type: "text", localized: true },
     {
       name: "mapEmbedUrl",
       label: "Lien d’intégration Google Maps",

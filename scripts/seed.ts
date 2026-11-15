@@ -10,6 +10,13 @@
  * Images come from scripts/seed-media/. With BLOB_READ_WRITE_TOKEN set they go
  * to that Blob store; a media doc whose file is missing from the current store
  * (e.g. dev rows created before Blob) is re-uploaded.
+ *
+ * Translations: content is written in French first, then copied to ar/en/de
+ * using scripts/seed-translations/<locale>.json ("French text": "translation").
+ * Strings missing from a file are copied as French and listed in the report.
+ *
+ * Production: NODE_ENV=production DATABASE_URI=<prod url> pnpm seed
+ * (NODE_ENV=production stops Payload's dev schema push from running on prod).
  */
 import path from "path";
 import fs from "fs";
@@ -18,6 +25,7 @@ import type { Payload } from "payload";
 import config from "@payload-config";
 
 import type { ServiceCategory } from "../payload-types";
+import { defaultLocale, locales, type Locale } from "../i18n/locales";
 
 const SEED_MEDIA_DIR = path.resolve(process.cwd(), "scripts/seed-media");
 
@@ -371,6 +379,98 @@ const media = (file: string) => {
 const list = (items?: readonly string[]) => items?.map((item) => ({ item }));
 
 /* ------------------------------------------------------------------ */
+/* Translations: French doc -> same doc with strings swapped per locale */
+/* ------------------------------------------------------------------ */
+
+const TRANSLATIONS_DIR = path.resolve(process.cwd(), "scripts/seed-translations");
+type Dict = Record<string, string>;
+const loadDict = (locale: Locale): Dict =>
+  JSON.parse(fs.readFileSync(path.join(TRANSLATIONS_DIR, `${locale}.json`), "utf8")) as Dict;
+
+/** Non-localized string fields: never translated, never reported as missing. */
+const SHARED_KEYS = new Set([
+  "id", "key", "slug", "icon", "email", "mapEmbedUrl", "display", "number",
+  "createdAt", "updatedAt", "globalType",
+]);
+
+/**
+ * Deep copy with every translatable string replaced. Array rows keep their `id`,
+ * so Payload stores the translation on the same rows (arrays are shared across
+ * locales; new rows would wipe the French text).
+ */
+function translate<T>(value: T, dict: Dict, missing: Set<string>, key?: string): T {
+  if (typeof value === "string") {
+    if (key && SHARED_KEYS.has(key)) return value;
+    const t = dict[value];
+    if (t === undefined) missing.add(value);
+    return (t ?? value) as T;
+  }
+  if (Array.isArray(value)) return value.map((v) => translate(v, dict, missing)) as T;
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, translate(v, dict, missing, k)]),
+    ) as T;
+  }
+  return value;
+}
+
+/** Top-level document metadata Payload must not receive back as data. */
+function withoutMeta<T extends object>(doc: T) {
+  const { id: _id, createdAt: _c, updatedAt: _u, globalType: _g, ...data } = doc as Record<string, unknown>;
+  return data;
+}
+
+const GLOBALS = ["hero", "biography", "contact", "site-settings"] as const;
+
+async function seedTranslations(payload: Payload) {
+  const read = { locale: defaultLocale, fallbackLocale: false, depth: 0 } as const;
+  const report: string[] = [];
+
+  for (const locale of locales.filter((l) => l !== defaultLocale)) {
+    const dict = loadDict(locale);
+    const missing = new Set<string>();
+
+    for (const slug of GLOBALS) {
+      const doc = await payload.findGlobal({ slug, ...read });
+      await payload.updateGlobal({ slug, locale, data: withoutMeta(translate(doc, dict, missing)) });
+      bump(`translations:${locale}`, "updated");
+    }
+
+    const { docs: categories } = await payload.find({
+      collection: "service-categories", ...read, limit: 100, pagination: false,
+    });
+    for (const doc of categories) {
+      await payload.update({
+        collection: "service-categories",
+        id: doc.id,
+        locale,
+        data: withoutMeta(translate(doc, dict, missing)),
+      });
+      bump(`translations:${locale}`, "updated");
+    }
+
+    for (const id of mediaIds.values()) {
+      const doc = await payload.findByID({ collection: "media", id, ...read });
+      await payload.update({
+        collection: "media",
+        id,
+        locale,
+        data: { alt: translate(doc.alt, dict, missing) },
+        depth: 0,
+      });
+      bump(`translations:${locale}`, "updated");
+    }
+
+    report.push(
+      missing.size
+        ? `${locale}: ${missing.size} string(s) not in seed-translations/${locale}.json (copied as French):\n      ${[...missing].join("\n      ")}`
+        : `${locale}: all strings translated`,
+    );
+  }
+  return report;
+}
+
+/* ------------------------------------------------------------------ */
 
 async function seed() {
   const payload = await getPayload({ config });
@@ -475,7 +575,10 @@ async function seed() {
   await payload.updateGlobal({ slug: "site-settings", data: siteSettings });
   bump("global:site-settings", "updated");
 
-  // 5. Known content without a schema field (static list, checked by hand)
+  // 5. ar / en / de versions of everything above (testimonials stay as written)
+  const translationReport = await seedTranslations(payload);
+
+  // 6. Known content without a schema field (static list, checked by hand)
   notMapped.push(
     "public/logo_transparent.png (components/Logo.tsx): no logo field in schema",
     "Section headings/intros with no field: Biography 'À Propos du Docteur' + 'Longue expérience en ophtalmologie'; Services 'Nos Services Ophtalmologiques' + intro; ContactFooter 'Contact & Informations'; Testimonials heading + intro; services sidebar 'Nos Services'",
@@ -494,6 +597,8 @@ async function seed() {
     const { totalDocs } = await payload.count({ collection });
     console.log(`  ${collection.padEnd(24)} ${totalDocs}`);
   }
+  console.log("\nTranslations:");
+  for (const line of translationReport) console.log(`  - ${line}`);
   console.log("\nNot mapped:");
   for (const line of notMapped) console.log(`  - ${line}`);
 

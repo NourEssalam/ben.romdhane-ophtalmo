@@ -7,7 +7,8 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactFooter from "@/components/ContactFooter";
-import NotFound from "./(frontend)/not-found";
+import NotFound from "./(frontend)/[locale]/not-found";
+import { NextIntlClientProvider } from "next-intl";
 import { getGlobal, getServiceCategories, toServiceLinks } from "@/lib/payload";
 
 export const metadata: Metadata = {
@@ -17,17 +18,20 @@ export const metadata: Metadata = {
 
 export default async function GlobalNotFound() {
   const [categories, contact] = await Promise.all([
-    getServiceCategories(),
-    getGlobal("contact"),
+    getServiceCategories("fr"),
+    getGlobal("contact", "fr"),
   ]);
 
   return (
     <html lang="fr">
       <body className="font-sans antialiased">
-        <Header services={toServiceLinks(categories)} />
-        <NotFound />
-        <ContactFooter contact={contact} />
-        <Footer />
+        {/* No locale segment here: request config falls back to French. */}
+        <NextIntlClientProvider>
+          <Header services={toServiceLinks(categories)} />
+          <NotFound />
+          <ContactFooter contact={contact} />
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

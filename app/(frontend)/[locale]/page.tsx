@@ -10,12 +10,14 @@ import {
   mediaProps,
   toServiceLinks,
 } from "@/lib/payload";
+import { initLocale, type LocaleParams } from "@/i18n/locale";
 
-export default async function Page() {
+export default async function Page({ params }: LocaleParams) {
+  const locale = await initLocale(params);
   const [hero, categories, biography, testimonials] = await Promise.all([
-    getGlobal("hero"),
-    getServiceCategories(),
-    getGlobal("biography"),
+    getGlobal("hero", locale),
+    getServiceCategories(locale),
+    getGlobal("biography", locale),
     getTestimonials(),
   ]);
 
