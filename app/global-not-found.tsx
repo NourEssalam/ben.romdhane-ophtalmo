@@ -5,6 +5,7 @@
 import "./(frontend)/globals.css";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
+import ThemeScript from "@/components/ThemeScript";
 import Footer from "@/components/Footer";
 import ContactFooter from "@/components/ContactFooter";
 import NotFound from "./(frontend)/[locale]/not-found";
@@ -23,7 +24,10 @@ export default async function GlobalNotFound() {
   ]);
 
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="font-sans antialiased">
         {/* No locale segment here: request config falls back to French. */}
         <NextIntlClientProvider>

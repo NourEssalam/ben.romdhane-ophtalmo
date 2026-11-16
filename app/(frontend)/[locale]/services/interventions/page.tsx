@@ -21,10 +21,10 @@ export default async function InterventionsPage({ params }: LocaleParams) {
             <Icon className="w-8 h-8 text-brand" />
           </div>
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">
+            <h1 className="text-3xl sm:text-4xl font-bold text-fg">
               {category.title}
             </h1>
-            <p className="mt-1 text-slate-600">
+            <p className="mt-1 text-fg-muted">
               {category.subtitle}
             </p>
           </div>
@@ -57,7 +57,7 @@ export default async function InterventionsPage({ params }: LocaleParams) {
             <div className="p-6 sm:p-8">
               {sub.interventions && (
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-fg mb-4 flex items-center gap-2">
                     <div className="w-1 h-6 rounded-sm bg-brand" />
                     {t("interventions")}
                   </h3>
@@ -65,13 +65,13 @@ export default async function InterventionsPage({ params }: LocaleParams) {
                     {sub.interventions.map((it, i) => (
                       <div
                         key={i}
-                        className="p-5 bg-slate-50 rounded-xl border-2 border-slate-200 hover:border-brand/30 transition-colors"
+                        className="p-5 bg-surface-muted rounded-xl border-2 border-line hover:border-brand/30 transition-colors"
                       >
-                        <h4 className="font-bold text-base text-slate-900 mb-2 flex items-center gap-2">
+                        <h4 className="font-bold text-base text-fg mb-2 flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-brand" />
                           {it.name}
                         </h4>
-                        <p className="text-sm text-slate-600">{it.desc}</p>
+                        <p className="text-sm text-fg-muted">{it.desc}</p>
                       </div>
                     ))}
                   </div>

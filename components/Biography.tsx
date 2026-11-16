@@ -18,20 +18,20 @@ export default function Biography({
   return (
     <section
       id="biographie"
-      className="py-10 sm:py-12 md:py-14 bg-gradient-to-b from-white to-brand-light/20"
+      className="py-10 sm:py-12 md:py-14 bg-gradient-to-b from-surface to-brand-light/20"
     >
       <div className="container-section">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-fg mb-2">
             {t("title")}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600">
+          <p className="text-xs sm:text-sm text-fg-muted">
             {t("subtitle")}
           </p>
         </div>
 
-        <div className="card bg-gradient-to-br from-white to-slate-50/50 p-5 sm:p-6 md:p-8">
+        <div className="card bg-gradient-to-br from-surface to-surface-muted/50 p-5 sm:p-6 md:p-8">
           <div className="grid gap-6 lg:grid-cols-12 items-start">
             {/* Left Column - Image */}
             <div className="lg:col-span-4">
@@ -62,11 +62,11 @@ export default function Biography({
                 <div className="flex items-start gap-3">
                   <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6 text-brand shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-fg mb-1">
                       {data.headline}
                     </h3>
                     {data.headlineSubtitle && (
-                      <p className="text-xs sm:text-sm text-slate-600">
+                      <p className="text-xs sm:text-sm text-fg-muted">
                         {data.headlineSubtitle}
                       </p>
                     )}
@@ -76,15 +76,15 @@ export default function Biography({
 
               <BiographyDetails>
                 {/* Education */}
-                <div className="bg-blue-50/50 rounded-lg p-4">
+                <div className="bg-blue-500/10 rounded-lg p-4">
                   <div className="flex items-start gap-3">
                     <GraduationCap className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="font-semibold text-sm sm:text-base text-slate-900">
+                      <h4 className="font-semibold text-sm sm:text-base text-fg">
                         {data.education?.institution}
                       </h4>
                       {data.education?.diploma && (
-                        <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                        <p className="text-xs sm:text-sm text-fg-muted mt-1">
                           {data.education.diploma}
                         </p>
                       )}
@@ -93,10 +93,10 @@ export default function Biography({
                 </div>
 
                 {/* Professional Experience */}
-                <div className="bg-emerald-50/50 rounded-lg p-4">
+                <div className="bg-emerald-500/10 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
                     <Building2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                    <h4 className="font-semibold text-sm sm:text-base text-slate-900">
+                    <h4 className="font-semibold text-sm sm:text-base text-fg">
                       {data.experience?.title}
                     </h4>
                   </div>
@@ -104,7 +104,7 @@ export default function Biography({
                     {experienceItems.map((entry, i) => (
                       <li
                         key={entry.id ?? i}
-                        className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
+                        className="flex items-start gap-2 text-xs sm:text-sm text-fg-body"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
                         <span>{entry.item}</span>
@@ -114,15 +114,15 @@ export default function Biography({
                 </div>
 
                 {/* Additional Diplomas */}
-                <div className="bg-amber-50/50 rounded-lg p-4">
+                <div className="bg-amber-500/10 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
                     <Award className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="font-semibold text-sm sm:text-base text-slate-900">
+                      <h4 className="font-semibold text-sm sm:text-base text-fg">
                         {data.diplomas?.title}
                       </h4>
                       {data.diplomas?.institution && (
-                        <p className="text-xs text-slate-600 mt-0.5">
+                        <p className="text-xs text-fg-muted mt-0.5">
                           {data.diplomas.institution}
                         </p>
                       )}
@@ -132,7 +132,7 @@ export default function Biography({
                     {diplomaItems.map((entry, i) => (
                       <li
                         key={entry.id ?? i}
-                        className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
+                        className="flex items-start gap-2 text-xs sm:text-sm text-fg-body"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5" />
                         <span>{entry.item}</span>

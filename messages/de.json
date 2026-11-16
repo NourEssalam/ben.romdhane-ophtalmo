@@ -65,5 +65,9 @@
     "title": "Seite nicht gefunden",
     "text": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
     "back": "Zurück zur Startseite"
+  },
+  "ThemeToggle": {
+    "toDark": "Zum dunklen Design wechseln",
+    "toLight": "Zum hellen Design wechseln"
   }
 }

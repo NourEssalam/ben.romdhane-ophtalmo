@@ -65,5 +65,9 @@
     "title": "Page not found",
     "text": "The page you are looking for does not exist or has been moved.",
     "back": "Back to home"
+  },
+  "ThemeToggle": {
+    "toDark": "Switch to dark theme",
+    "toLight": "Switch to light theme"
   }
 }

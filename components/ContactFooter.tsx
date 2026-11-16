@@ -11,15 +11,15 @@ export default function ContactFooter({ contact }: { contact: Contact }) {
       <div className="container-section">
         <div className="grid gap-6 sm:gap-8 md:grid-cols-2">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+            <h2 className="text-2xl sm:text-3xl font-bold text-fg">
               {t("title")}
             </h2>
             {contact.intro && (
-              <p className="mt-2 text-sm sm:text-base text-slate-700">
+              <p className="mt-2 text-sm sm:text-base text-fg-body">
                 {contact.intro}
               </p>
             )}
-            <div className="mt-4 sm:mt-6 grid gap-3 text-sm sm:text-base text-slate-700">
+            <div className="mt-4 sm:mt-6 grid gap-3 text-sm sm:text-base text-fg-body">
               {contact.address && (
                 <p>
                   <strong>{t("address")}</strong>

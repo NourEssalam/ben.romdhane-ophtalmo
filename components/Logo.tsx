@@ -20,7 +20,7 @@ export default function Logo() {
         <p className="font-semibold">
           Dr Brahim <i className="italic text-lg">Ben Romdhane</i>
         </p>
-        <p className="text-xs text-slate-500">{t("specialty")}</p>
+        <p className="text-xs text-fg-muted">{t("specialty")}</p>
       </div>
     </Link>
   );
