@@ -65,5 +65,9 @@
     "title": "Page introuvable",
     "text": "La page que vous recherchez n’existe pas ou a été déplacée.",
     "back": "Retour à l’accueil"
+  },
+  "ThemeToggle": {
+    "toDark": "Passer au thème sombre",
+    "toLight": "Passer au thème clair"
   }
 }

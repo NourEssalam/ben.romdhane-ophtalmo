@@ -1,7 +1,51 @@
 @import "tailwindcss";
 
+/*
+  Theme tokens. Raw values swap on <html data-theme="dark">,
+  which components/ThemeScript.tsx sets before first paint.
+*/
+:root {
+  color-scheme: light;
+  --surface: #ffffff;        /* white */
+  --surface-muted: #f8fafc;  /* slate-50 */
+  --surface-subtle: #f1f5f9; /* slate-100 */
+  --fg: #0f172a;             /* slate-900 */
+  --fg-body: #334155;        /* slate-700 */
+  --fg-muted: #475569;       /* slate-600 */
+  --fg-subtle: #94a3b8;      /* slate-400 */
+  --line: #e2e8f0;           /* slate-200 */
+  --line-strong: #cbd5e1;    /* slate-300 */
+  --brand-tint: #e6f4f1;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #0f172a;        /* slate-900 */
+  --surface-muted: #0b1220;
+  --surface-subtle: #1e293b; /* slate-800 */
+  --fg: #f1f5f9;             /* slate-100 */
+  --fg-body: #cbd5e1;        /* slate-300 */
+  --fg-muted: #94a3b8;       /* slate-400 */
+  --fg-subtle: #64748b;      /* slate-500 */
+  --line: #1e293b;           /* slate-800 */
+  --line-strong: #334155;    /* slate-700 */
+  --brand-tint: #123c38;
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-fg: var(--fg);
+  --color-fg-body: var(--fg-body);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-brand-light: var(--brand-tint);
+}
+
 @theme {
-  --color-brand-light: #e6f4f1;
   --color-brand: #2aa79b;
   --color-brand-dark: #1b6f67;
   --color-accent: #67b3ff;
@@ -22,17 +66,14 @@
   }
 }
 
-/*
-  Tailwind v4 defaults border color to currentcolor.
-  Keep the v3 default (gray-200) so existing borders look unchanged.
-*/
+/* Default border colour follows the theme (v3 default was gray-200). */
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--color-line, currentcolor);
   }
 }
 
@@ -41,7 +82,7 @@
 }
 
 html, body {
-  @apply bg-white text-slate-800;
+  @apply bg-surface text-fg;
 }
 
 .container-section {
@@ -53,5 +94,5 @@ html, body {
 }
 
 .card {
-  @apply bg-white/80 backdrop-blur-sm rounded-xl shadow-xs ring-1 ring-slate-200 hover:shadow-md transition;
+  @apply bg-surface/80 backdrop-blur-sm rounded-xl shadow-xs ring-1 ring-line hover:shadow-md transition;
 }

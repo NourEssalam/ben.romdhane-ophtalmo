@@ -22,10 +22,10 @@ export default async function PathologiesPage({ params }: LocaleParams) {
             <Icon className="w-8 h-8 text-brand" />
           </div>
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">
+            <h1 className="text-3xl sm:text-4xl font-bold text-fg">
               {category.title}
             </h1>
-            <p className="mt-1 text-slate-600">
+            <p className="mt-1 text-fg-muted">
               {category.subtitle}
             </p>
           </div>
@@ -58,7 +58,7 @@ export default async function PathologiesPage({ params }: LocaleParams) {
             <div className="p-6 sm:p-8">
               {sub.conditions && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-fg mb-4 flex items-center gap-2">
                     <div className="w-1 h-6 rounded-sm bg-brand" />
                     {t("conditions")}
                   </h3>
@@ -77,7 +77,7 @@ export default async function PathologiesPage({ params }: LocaleParams) {
 
               {sub.treatments && (
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-fg mb-4 flex items-center gap-2">
                     <div className="w-1 h-6 rounded-sm bg-brand" />
                     {t("treatments")}
                   </h3>
@@ -90,10 +90,10 @@ export default async function PathologiesPage({ params }: LocaleParams) {
                         <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-3 bg-brand text-white">
                           <Eye className="w-5 h-5" />
                         </div>
-                        <h4 className="font-bold text-base text-slate-900 mb-1">
+                        <h4 className="font-bold text-base text-fg mb-1">
                           {t.name}
                         </h4>
-                        <p className="text-sm text-slate-600">{t.desc}</p>
+                        <p className="text-sm text-fg-muted">{t.desc}</p>
                       </div>
                     ))}
                   </div>

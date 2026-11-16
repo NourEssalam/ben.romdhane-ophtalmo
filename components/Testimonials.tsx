@@ -52,13 +52,13 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
   return (
     <section
       id="temoignages"
-      className="section-padding bg-gradient-to-b from-slate-50 to-white"
+      className="section-padding bg-gradient-to-b from-surface-muted to-surface"
     >
       <div className="container-section">
-        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold text-fg text-center">
           {t("title")}
         </h2>
-        <p className="mt-3 text-base sm:text-lg text-slate-600 text-center">
+        <p className="mt-3 text-base sm:text-lg text-fg-muted text-center">
           {t("subtitle")}
         </p>
 
@@ -68,7 +68,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
           <button
             onClick={prev}
             aria-label={t("previous")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-slate-200 hover:border-slate-300 flex items-center justify-center text-slate-700 hover:text-slate-900 transition-all duration-200 hover:scale-110"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface shadow-lg hover:shadow-xl border-2 border-line hover:border-line-strong flex items-center justify-center text-fg-body hover:text-fg transition-all duration-200 hover:scale-110"
           >
             <svg
               className="w-5 h-5 sm:w-6 sm:h-6"
@@ -89,7 +89,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
           <button
             onClick={next}
             aria-label={t("next")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-slate-200 hover:border-slate-300 flex items-center justify-center text-slate-700 hover:text-slate-900 transition-all duration-200 hover:scale-110"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface shadow-lg hover:shadow-xl border-2 border-line hover:border-line-strong flex items-center justify-center text-fg-body hover:text-fg transition-all duration-200 hover:scale-110"
           >
             <svg
               className="w-5 h-5 sm:w-6 sm:h-6"
@@ -117,7 +117,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
                   {slideReviews.map((review) => (
                     <blockquote
                       key={review.id}
-                      className="flex-1 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 sm:p-8 border border-slate-100"
+                      className="flex-1 bg-surface rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 sm:p-8 border border-line"
                       dir={review.dir || "ltr"}
                     >
                       <div className="flex items-start mb-4">
@@ -130,14 +130,14 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
                         </svg>
                       </div>
                       <p
-                        className={`text-base sm:text-lg leading-relaxed text-slate-700 mb-4 ${
+                        className={`text-base sm:text-lg leading-relaxed text-fg-body mb-4 ${
                           review.dir === "rtl" ? "text-right" : ""
                         }`}
                       >
                         {review.text}
                       </p>
                       <footer
-                        className={`text-sm font-semibold text-slate-900 ${
+                        className={`text-sm font-semibold text-fg ${
                           review.dir === "rtl" ? "text-right" : ""
                         }`}
                       >
@@ -160,7 +160,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   idx === index
                     ? "bg-brand w-8"
-                    : "bg-slate-300 hover:bg-slate-400"
+                    : "bg-line-strong hover:bg-fg-subtle"
                 }`}
               />
             ))}

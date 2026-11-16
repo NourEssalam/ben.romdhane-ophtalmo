@@ -49,7 +49,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent" />
                 <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
-                  <div className="p-2 rounded-xl bg-white/95 backdrop-blur-xs shadow-lg">
+                  <div className="p-2 rounded-xl bg-surface/95 backdrop-blur-xs shadow-lg">
                     <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-brand" />
                   </div>
                 </div>
@@ -63,7 +63,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
               {/* Content */}
               <div className="p-3 sm:p-4">
                 {service.description && (
-                  <p className="text-xs sm:text-sm text-slate-600 mb-2 sm:mb-3 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-fg-muted mb-2 sm:mb-3 leading-relaxed">
                     {service.description}
                   </p>
                 )}
@@ -73,7 +73,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
                   {service.features.map((feature, idx) => (
                     <li
                       key={idx}
-                      className="flex items-center gap-2 text-xs sm:text-sm text-slate-700"
+                      className="flex items-center gap-2 text-xs sm:text-sm text-fg-body"
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
                       <span>{feature}</span>

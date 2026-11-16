@@ -6,15 +6,15 @@ export default function Services({ cards }: { cards: ServiceCard[] }) {
   return (
     <section
       id="services"
-      className="py-10 sm:py-12 md:py-14 bg-gradient-to-b from-white via-brand-light/30 to-white"
+      className="py-10 sm:py-12 md:py-14 bg-gradient-to-b from-surface via-brand-light/30 to-surface"
     >
       <div className="container-section">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10">
-          <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-2 sm:mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-fg mb-2 sm:mb-3">
             {t("title")}
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-slate-700 leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-fg-body leading-relaxed">
             {t("intro")}
           </p>
         </div>
@@ -23,7 +23,7 @@ export default function Services({ cards }: { cards: ServiceCard[] }) {
 
         {/* Bottom CTA */}
         <div className="mt-6 sm:mt-8 md:mt-10 text-center">
-          <p className="text-xs sm:text-sm text-slate-700 mb-2 sm:mb-3">
+          <p className="text-xs sm:text-sm text-fg-body mb-2 sm:mb-3">
             {t("ctaQuestion")}
           </p>
           <a

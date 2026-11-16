@@ -60,15 +60,15 @@ export default function Hero({
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 absolute bottom-4 sm:bottom-8 md:bottom-10 left-0 right-0">
           <div className="max-w-2xl animate-fadeInUp">
             {/* Text Container with Backdrop */}
-            <div className="bg-white/85 backdrop-blur-xs p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl shadow-2xl">
+            <div className="bg-surface/85 backdrop-blur-xs p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl shadow-2xl">
               <h1
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-fg leading-tight"
                 style={{ textShadow: "1px 1px 3px rgba(255,255,255,0.8)" }}
               >
                 {heading}
               </h1>
               {intro && (
-                <p className="mt-3 sm:mt-4 text-slate-700 text-sm sm:text-base md:text-lg leading-relaxed">
+                <p className="mt-3 sm:mt-4 text-fg-body text-sm sm:text-base md:text-lg leading-relaxed">
                   {intro}
                 </p>
               )}
@@ -77,13 +77,13 @@ export default function Hero({
               <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <a
                   href="#services"
-                  className="inline-flex items-center justify-center rounded-full bg-[#2aa79b] px-5 py-2.5 sm:px-6 sm:py-3 text-white text-sm sm:text-base font-medium hover:bg-[#1b6f67] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 sm:px-6 sm:py-3 text-white text-sm sm:text-base font-medium hover:bg-brand-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   {primaryCtaLabel}
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-full ring-2 ring-slate-300 bg-white px-5 py-2.5 sm:px-6 sm:py-3 text-slate-700 text-sm sm:text-base font-medium hover:bg-slate-50 hover:ring-slate-400 transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="inline-flex items-center justify-center rounded-full ring-2 ring-line-strong bg-surface px-5 py-2.5 sm:px-6 sm:py-3 text-fg-body text-sm sm:text-base font-medium hover:bg-surface-muted hover:ring-fg-subtle transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   {secondaryCtaLabel}
                 </a>

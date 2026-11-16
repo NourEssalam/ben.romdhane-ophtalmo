@@ -2,6 +2,7 @@ import "../globals.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import Header from "@/components/Header";
+import ThemeScript from "@/components/ThemeScript";
 import Footer from "@/components/Footer";
 import ContactFooter from "@/components/ContactFooter";
 import { getGlobal, getServiceCategories, toServiceLinks } from "@/lib/payload";
@@ -31,7 +32,10 @@ export default async function LocaleLayout({
   ]);
 
   return (
-    <html lang={locale} dir={localeDir(locale)}>
+    <html lang={locale} dir={localeDir(locale)} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="font-sans antialiased">
         <NextIntlClientProvider>
           <Header services={toServiceLinks(categories)} />
