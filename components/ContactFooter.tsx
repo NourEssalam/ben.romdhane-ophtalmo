@@ -1,7 +1,9 @@
 import { Fragment } from "react";
+import { useTranslations } from "next-intl";
 import type { Contact } from "../payload-types";
 
 export default function ContactFooter({ contact }: { contact: Contact }) {
+  const t = useTranslations("Contact");
   const phones = contact.phones ?? [];
 
   return (
@@ -10,7 +12,7 @@ export default function ContactFooter({ contact }: { contact: Contact }) {
         <div className="grid gap-6 sm:gap-8 md:grid-cols-2">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-              Contact & Informations
+              {t("title")}
             </h2>
             {contact.intro && (
               <p className="mt-2 text-sm sm:text-base text-slate-700">
@@ -20,20 +22,20 @@ export default function ContactFooter({ contact }: { contact: Contact }) {
             <div className="mt-4 sm:mt-6 grid gap-3 text-sm sm:text-base text-slate-700">
               {contact.address && (
                 <p>
-                  <strong>Adresse:</strong>
+                  <strong>{t("address")}</strong>
                   <br className="sm:hidden" /> {contact.address}
                 </p>
               )}
               {contact.landmark && (
                 <p>
-                  <strong>Repèrage:</strong>
+                  <strong>{t("landmark")}</strong>
                   <br className="sm:hidden" /> {contact.landmark}{" "}
                 </p>
               )}
 
               {phones.length > 0 && (
                 <p>
-                  <strong>Téléphone:</strong>{" "}
+                  <strong>{t("phone")}</strong>{" "}
                   {phones.map((phone, i) => (
                     <Fragment key={phone.id ?? i}>
                       {i > 0 && " / "}
@@ -46,7 +48,7 @@ export default function ContactFooter({ contact }: { contact: Contact }) {
               )}
               {contact.email && (
                 <p>
-                  <strong>Email:</strong>{" "}
+                  <strong>{t("email")}</strong>{" "}
                   <a
                     href={`mailto:${contact.email}`}
                     className="text-brand hover:underline"
@@ -57,7 +59,7 @@ export default function ContactFooter({ contact }: { contact: Contact }) {
               )}
               {contact.hours && (
                 <p>
-                  <strong>Horaires:</strong> {contact.hours}
+                  <strong>{t("hours")}</strong> {contact.hours}
                 </p>
               )}
             </div>
@@ -66,6 +68,7 @@ export default function ContactFooter({ contact }: { contact: Contact }) {
             <div className="card p-2 sm:p-4">
               <iframe
                 src={contact.mapEmbedUrl}
+                title={t("mapTitle")}
                 className="w-full h-48 sm:h-64 rounded-lg"
                 loading="lazy"
               ></iframe>

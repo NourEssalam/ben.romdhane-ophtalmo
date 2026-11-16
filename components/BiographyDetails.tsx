@@ -1,13 +1,15 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 
-/** Collapsible biography details + mobile "Voir plus" toggle (needs state). */
+/** Collapsible biography details + mobile "show more" toggle (needs state). */
 export default function BiographyDetails({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("Biography");
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -27,7 +29,7 @@ export default function BiographyDetails({
           onClick={() => setIsExpanded(!isExpanded)}
           className="inline-flex items-center gap-2 text-brand font-semibold text-sm hover:text-brand-dark transition-colors"
         >
-          <span>{isExpanded ? "Voir moins" : "Voir plus de détails"}</span>
+          <span>{isExpanded ? t("showLess") : t("showMore")}</span>
           <ChevronDown
             className={`w-5 h-5 transition-transform duration-300 ${
               isExpanded ? "rotate-180" : ""

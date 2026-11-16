@@ -29,6 +29,9 @@
       "@/lib/*": [
         "./lib/*"
       ],
+      "@/i18n/*": [
+        "./i18n/*"
+      ],
       "@payload-config": [
         "./payload.config.ts"
       ]

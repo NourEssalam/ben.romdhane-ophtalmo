@@ -3,25 +3,29 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import type { Config, Media, ServiceCategory } from "../payload-types";
 import type { ServiceLink } from "@/components/icons";
+import type { Locale } from "@/i18n/locales";
 
 /** Local API client, created once per request (and reused by Payload across requests). */
 export const getPayloadClient = cache(() => getPayload({ config }));
 
 type GlobalSlug = keyof Config["globals"];
 
-/** A global with its upload fields populated (depth 1). */
+// Localized reads: missing translations fall back to French (payload.config.ts → localization.fallback).
+
+/** A global in `locale`, with its upload fields populated (depth 1). */
 export const getGlobal = cache(
-  async <S extends GlobalSlug>(slug: S): Promise<Config["globals"][S]> => {
+  async <S extends GlobalSlug>(slug: S, locale: Locale): Promise<Config["globals"][S]> => {
     const payload = await getPayloadClient();
-    return (await payload.findGlobal({ slug, depth: 1 })) as Config["globals"][S];
+    return (await payload.findGlobal({ slug, locale, depth: 1 })) as Config["globals"][S];
   },
 );
 
-/** All service categories, in admin sort order. */
-export const getServiceCategories = cache(async (): Promise<ServiceCategory[]> => {
+/** All service categories in `locale`, in admin sort order. */
+export const getServiceCategories = cache(async (locale: Locale): Promise<ServiceCategory[]> => {
   const payload = await getPayloadClient();
   const { docs } = await payload.find({
     collection: "service-categories",
+    locale,
     sort: "sortOrder",
     depth: 1,
     limit: 100,
@@ -31,10 +35,11 @@ export const getServiceCategories = cache(async (): Promise<ServiceCategory[]> =
 });
 
 export const getServiceCategory = cache(
-  async (slug: ServiceCategory["slug"]): Promise<ServiceCategory | undefined> =>
-    (await getServiceCategories()).find((c) => c.slug === slug),
+  async (slug: ServiceCategory["slug"], locale: Locale): Promise<ServiceCategory | undefined> =>
+    (await getServiceCategories(locale)).find((c) => c.slug === slug),
 );
 
+/** Testimonials are not localized: each keeps its original language and `dir`. */
 export const getTestimonials = cache(async () => {
   const payload = await getPayloadClient();
   const { docs } = await payload.find({

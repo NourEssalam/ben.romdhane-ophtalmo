@@ -1,10 +1,11 @@
 "use client";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { categoryIcons, type ServiceLink } from "./icons";
 
-/** Services sidebar (desktop) + select (mobile); needs the current path. */
+/** Services sidebar (desktop) + select (mobile); needs the current path (without locale prefix). */
 export default function ServicesNav({ links }: { links: ServiceLink[] }) {
+  const t = useTranslations("Services");
   const pathname = usePathname();
   const router = useRouter();
 
@@ -16,7 +17,7 @@ export default function ServicesNav({ links }: { links: ServiceLink[] }) {
           <div className="card p-2">
             <div className="p-3 mb-2">
               <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wide">
-                Nos Services
+                {t("navTitle")}
               </h2>
             </div>
             <ul className="space-y-1">

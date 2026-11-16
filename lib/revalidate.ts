@@ -15,7 +15,8 @@ export type RevalidateTarget = string | [string, "page" | "layout"];
 
 /** Every page (header nav, contact footer and metadata live in the root layout). */
 export const ALL_PAGES: RevalidateTarget = ["/", "layout"];
-export const HOME: RevalidateTarget = "/";
+// Home lives at app/(frontend)/[locale]/page.tsx; this revalidates it for every locale.
+export const HOME: RevalidateTarget = ["/[locale]", "page"];
 
 function revalidate(targets: RevalidateTarget[], req: PayloadRequest) {
   for (const target of targets) {

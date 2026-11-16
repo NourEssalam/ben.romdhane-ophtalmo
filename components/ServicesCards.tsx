@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { categoryIcons, type ServiceLink } from "./icons";
 
@@ -12,8 +13,9 @@ export type ServiceCard = ServiceLink & {
   features: string[];
 };
 
-/** Cards grid + mobile "Voir tous les services" toggle (needs state). */
+/** Cards grid + mobile "show all services" toggle (needs state). */
 export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
+  const t = useTranslations("Services");
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -81,7 +83,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
 
                 {/* CTA */}
                 <div className="flex items-center gap-2 text-brand font-semibold text-xs sm:text-sm group-hover:gap-3 transition-all">
-                  <span>En savoir plus</span>
+                  <span>{t("learnMore")}</span>
                   <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -96,7 +98,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
           onClick={() => setIsExpanded(!isExpanded)}
           className="inline-flex items-center gap-2 text-brand font-semibold text-sm hover:text-brand-dark transition-colors"
         >
-          <span>{isExpanded ? "Voir moins" : "Voir tous les services"}</span>
+          <span>{isExpanded ? t("showLess") : t("showAll")}</span>
           <ChevronDown
             className={`w-5 h-5 transition-transform duration-300 ${
               isExpanded ? "rotate-180" : ""

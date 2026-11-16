@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 export interface Review {
   id: number | string;
@@ -17,6 +18,7 @@ function chunkReviews(reviews: Review[], reviewsPerSlide: number) {
 }
 
 export default function Testimonials({ reviews }: { reviews: Review[] }) {
+  const t = useTranslations("Testimonials");
   const [reviewsPerSlide, setReviewsPerSlide] = useState(1);
 
   useEffect(() => {
@@ -54,10 +56,10 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
     >
       <div className="container-section">
         <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center">
-          Témoignages
+          {t("title")}
         </h2>
         <p className="mt-3 text-base sm:text-lg text-slate-600 text-center">
-          Quelques avis de nos patients
+          {t("subtitle")}
         </p>
 
         {/* Carousel wrapper with padding for buttons */}
@@ -65,7 +67,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
           {/* Previous Button */}
           <button
             onClick={prev}
-            aria-label="Témoignage précédent"
+            aria-label={t("previous")}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-slate-200 hover:border-slate-300 flex items-center justify-center text-slate-700 hover:text-slate-900 transition-all duration-200 hover:scale-110"
           >
             <svg
@@ -86,7 +88,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
           {/* Next Button */}
           <button
             onClick={next}
-            aria-label="Témoignage suivant"
+            aria-label={t("next")}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-slate-200 hover:border-slate-300 flex items-center justify-center text-slate-700 hover:text-slate-900 transition-all duration-200 hover:scale-110"
           >
             <svg
@@ -154,7 +156,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
               <button
                 key={idx}
                 onClick={() => setIndex(idx)}
-                aria-label={`Aller au témoignage ${idx + 1}`}
+                aria-label={t("goTo", { number: idx + 1 })}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   idx === index
                     ? "bg-brand w-8"

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export type HeroSlide = { src: string; alt: string };
 
@@ -19,6 +20,7 @@ export default function Hero({
   primaryCtaLabel,
   secondaryCtaLabel,
 }: HeroProps) {
+  const t = useTranslations("Hero");
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -101,7 +103,7 @@ export default function Hero({
                   ? "w-8 bg-white"
                   : "w-2 bg-white/50 hover:bg-white/75"
               }`}
-              aria-label={`Go to slide ${i + 1}`}
+              aria-label={t("goToSlide", { number: i + 1 })}
             />
           ))}
         </div>

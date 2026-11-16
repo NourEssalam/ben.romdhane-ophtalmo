@@ -90,7 +90,8 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale:
+    ('false' | 'none' | 'null') | false | null | ('fr' | 'ar' | 'en' | 'de') | ('fr' | 'ar' | 'en' | 'de')[];
   globals: {
     hero: Hero;
     biography: Biography;
@@ -103,7 +104,7 @@ export interface Config {
     contact: ContactSelect<false> | ContactSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
-  locale: null;
+  locale: 'fr' | 'ar' | 'en' | 'de';
   widgets: {
     collections: CollectionsWidget;
   };

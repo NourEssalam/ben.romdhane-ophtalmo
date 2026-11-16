@@ -2,10 +2,14 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { categoryIcons } from "@/components/icons";
 import { getServiceCategory, toSubcategories } from "@/lib/payload";
+import { getTranslations } from "next-intl/server";
+import { initLocale, type LocaleParams } from "@/i18n/locale";
 import { ChevronRight } from "lucide-react";
 
-export default async function ExamensPage() {
-  const category = await getServiceCategory("examens");
+export default async function ExamensPage({ params }: LocaleParams) {
+  const locale = await initLocale(params); // before getTranslations: keeps the page static
+  const t = await getTranslations("ServicePages");
+  const category = await getServiceCategory("examens", locale);
   if (!category) notFound();
   const Icon = categoryIcons[category.icon];
   const subcategories = toSubcategories(category);
@@ -56,7 +60,7 @@ export default async function ExamensPage() {
                   <div className="mb-6">
                     <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                       <div className="w-1 h-6 rounded bg-brand" />
-                      Équipements Utilisés
+                      {t("equipment")}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                       {sub.equipment.map((eq, i) => (
@@ -78,7 +82,7 @@ export default async function ExamensPage() {
                   <div>
                     <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                       <div className="w-1 h-6 rounded bg-brand" />
-                      Applications Cliniques
+                      {t("applications")}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {sub.applications.map((app, i) => (
