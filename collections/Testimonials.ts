@@ -1,12 +1,16 @@
 import type { CollectionConfig } from "payload";
 import { anyone, authenticated } from "../access";
+import { common } from "../i18n/adminLabels";
 import { HOME, collectionRevalidate } from "../lib/revalidate";
 
 export const Testimonials: CollectionConfig = {
   slug: "testimonials",
-  labels: { singular: "Témoignage", plural: "Témoignages" },
+  labels: {
+    singular: { fr: "Témoignage", ar: "شهادة", en: "Testimonial", de: "Erfahrungsbericht" },
+    plural: { fr: "Témoignages", ar: "الشهادات", en: "Testimonials", de: "Erfahrungsberichte" },
+  },
   admin: {
-    group: "Contenu",
+    group: common.groupContent,
     useAsTitle: "name",
     defaultColumns: ["name", "dir", "sortOrder"],
   },
@@ -19,22 +23,48 @@ export const Testimonials: CollectionConfig = {
   },
   hooks: collectionRevalidate(HOME),
   fields: [
-    { name: "name", label: "Nom du patient", type: "text", required: true },
-    { name: "text", label: "Témoignage", type: "textarea", required: true },
+    {
+      name: "name",
+      label: { fr: "Nom du patient", ar: "اسم المريض", en: "Patient name", de: "Name des Patienten" },
+      type: "text",
+      required: true,
+    },
+    {
+      name: "text",
+      label: { fr: "Témoignage", ar: "الشهادة", en: "Testimonial", de: "Erfahrungsbericht" },
+      type: "textarea",
+      required: true,
+    },
     {
       name: "dir",
-      label: "Sens d’écriture",
+      label: { fr: "Sens d’écriture", ar: "اتجاه الكتابة", en: "Text direction", de: "Schreibrichtung" },
       type: "select",
       defaultValue: "ltr",
       required: true,
       options: [
-        { label: "Gauche à droite (français)", value: "ltr" },
-        { label: "Droite à gauche (arabe)", value: "rtl" },
+        {
+          label: {
+            fr: "Gauche à droite (français)",
+            ar: "من اليسار إلى اليمين (الفرنسية)",
+            en: "Left to right (French)",
+            de: "Links nach rechts (Französisch)",
+          },
+          value: "ltr",
+        },
+        {
+          label: {
+            fr: "Droite à gauche (arabe)",
+            ar: "من اليمين إلى اليسار (العربية)",
+            en: "Right to left (Arabic)",
+            de: "Rechts nach links (Arabisch)",
+          },
+          value: "rtl",
+        },
       ],
     },
     {
       name: "sortOrder",
-      label: "Ordre d’affichage",
+      label: common.sortOrder,
       type: "number",
       defaultValue: 0,
       admin: { position: "sidebar" },

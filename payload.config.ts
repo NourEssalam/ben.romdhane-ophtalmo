@@ -4,9 +4,13 @@ import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import path from "path";
 import { buildConfig } from "payload";
 import type { CollectionConfig } from "payload";
+import { ar } from "payload/i18n/ar";
+import { de } from "payload/i18n/de";
+import { en } from "payload/i18n/en";
 import { fr } from "payload/i18n/fr";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
+import { common } from "./i18n/adminLabels";
 import { defaultLocale, localeNames, locales } from "./i18n/locales";
 
 import { Media } from "./collections/Media";
@@ -22,10 +26,13 @@ const dirname = path.dirname(filename);
 
 const Users: CollectionConfig = {
   slug: "users",
-  labels: { singular: "Utilisateur", plural: "Utilisateurs" },
+  labels: {
+    singular: { fr: "Utilisateur", ar: "مستخدم", en: "User", de: "Benutzer" },
+    plural: { fr: "Utilisateurs", ar: "المستخدمون", en: "Users", de: "Benutzer" },
+  },
   admin: {
     useAsTitle: "email",
-    group: "Paramètres",
+    group: common.groupSettings,
   },
   auth: true,
   fields: [],
@@ -48,8 +55,9 @@ export default buildConfig({
     defaultLocale,
     fallback: true,
   },
+  // Admin UI languages (each user picks one under Account → Language).
   i18n: {
-    supportedLanguages: { fr },
+    supportedLanguages: { fr, ar, en, de },
     fallbackLanguage: "fr",
   },
   editor: lexicalEditor(),

@@ -156,7 +156,7 @@ export interface ServiceCategory {
   subcategories?:
     | {
         /**
-         * Ex. : acuite, couleurs, globes. Sans espaces ni accents.
+         * E.g. acuite, couleurs, globes. No spaces or accents.
          */
         key: string;
         name: string;
@@ -207,7 +207,7 @@ export interface ServiceCategory {
 export interface Media {
   id: number;
   /**
-   * Décrit l’image pour l’accessibilité et le référencement.
+   * Describes the image for accessibility and SEO.
    */
   alt: string;
   _objectKey?: string | null;
@@ -572,11 +572,11 @@ export interface Contact {
   phones?:
     | {
         /**
-         * Ex. : 73 681 081
+         * E.g. 73 681 081
          */
         display: string;
         /**
-         * Ex. : 73681081
+         * E.g. 73681081
          */
         number: string;
         id?: string | null;
@@ -585,7 +585,7 @@ export interface Contact {
   email?: string | null;
   hours?: string | null;
   /**
-   * Google Maps › Partager › Intégrer une carte : copier uniquement l’URL du champ src.
+   * Google Maps › Share › Embed a map: copy only the URL from the src attribute.
    */
   mapEmbedUrl?: string | null;
   updatedAt?: string | null;
