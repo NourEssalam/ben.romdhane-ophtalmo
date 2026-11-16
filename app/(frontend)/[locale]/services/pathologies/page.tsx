@@ -59,7 +59,7 @@ export default async function PathologiesPage({ params }: LocaleParams) {
               {sub.conditions && (
                 <div className="mb-6">
                   <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <div className="w-1 h-6 rounded bg-brand" />
+                    <div className="w-1 h-6 rounded-sm bg-brand" />
                     {t("conditions")}
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -78,7 +78,7 @@ export default async function PathologiesPage({ params }: LocaleParams) {
               {sub.treatments && (
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <div className="w-1 h-6 rounded bg-brand" />
+                    <div className="w-1 h-6 rounded-sm bg-brand" />
                     {t("treatments")}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

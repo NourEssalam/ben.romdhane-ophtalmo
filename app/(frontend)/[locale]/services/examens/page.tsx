@@ -59,7 +59,7 @@ export default async function ExamensPage({ params }: LocaleParams) {
                 {sub.equipment && (
                   <div className="mb-6">
                     <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                      <div className="w-1 h-6 rounded bg-brand" />
+                      <div className="w-1 h-6 rounded-sm bg-brand" />
                       {t("equipment")}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -68,7 +68,7 @@ export default async function ExamensPage({ params }: LocaleParams) {
                           key={i}
                           className="flex items-start gap-2 p-3 rounded-lg bg-brand-light/50 border border-brand/20"
                         >
-                          <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
+                          <ChevronRight className="w-4 h-4 mt-0.5 shrink-0 text-brand" />
                           <span className="text-sm font-medium text-slate-700">
                             {eq}
                           </span>
@@ -81,7 +81,7 @@ export default async function ExamensPage({ params }: LocaleParams) {
                 {sub.applications && (
                   <div>
                     <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                      <div className="w-1 h-6 rounded bg-brand" />
+                      <div className="w-1 h-6 rounded-sm bg-brand" />
                       {t("applications")}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -90,7 +90,7 @@ export default async function ExamensPage({ params }: LocaleParams) {
                           key={i}
                           className="flex items-start gap-2 p-3 bg-slate-50 rounded-lg border border-slate-200"
                         >
-                          <div className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 bg-brand" />
+                          <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 bg-brand" />
                           <span className="text-sm text-slate-700">{app}</span>
                         </div>
                       ))}

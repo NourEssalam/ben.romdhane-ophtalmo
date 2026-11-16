@@ -60,7 +60,7 @@ export default function Hero({
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 absolute bottom-4 sm:bottom-8 md:bottom-10 left-0 right-0">
           <div className="max-w-2xl animate-fadeInUp">
             {/* Text Container with Backdrop */}
-            <div className="bg-white/85 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl shadow-2xl">
+            <div className="bg-white/85 backdrop-blur-xs p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl shadow-2xl">
               <h1
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight"
                 style={{ textShadow: "1px 1px 3px rgba(255,255,255,0.8)" }}
