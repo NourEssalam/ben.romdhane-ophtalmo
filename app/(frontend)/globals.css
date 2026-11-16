@@ -1,6 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-brand-light: #e6f4f1;
+  --color-brand: #2aa79b;
+  --color-brand-dark: #1b6f67;
+  --color-accent: #67b3ff;
+
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Tahoma, Arial, "Noto Sans", sans-serif;
+
+  --animate-fadeInUp: fadeInUp 700ms ease-out forwards;
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/*
+  Tailwind v4 defaults border color to currentcolor.
+  Keep the v3 default (gray-200) so existing borders look unchanged.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 :root {
   scroll-behavior: smooth;
@@ -19,6 +53,5 @@ html, body {
 }
 
 .card {
-  @apply bg-white/80 backdrop-blur rounded-xl shadow-sm ring-1 ring-slate-200 hover:shadow-md transition;
+  @apply bg-white/80 backdrop-blur-sm rounded-xl shadow-xs ring-1 ring-slate-200 hover:shadow-md transition;
 }
-

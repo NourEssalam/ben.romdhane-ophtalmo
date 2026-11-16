@@ -35,7 +35,7 @@ export default function ServicesNav({ links }: { links: ServiceLink[] }) {
                       }`}
                     >
                       <Icon
-                        className={`w-5 h-5 flex-shrink-0 transition-colors ${
+                        className={`w-5 h-5 shrink-0 transition-colors ${
                           isActive
                             ? "text-white"
                             : "text-slate-400 group-hover:text-brand"
@@ -56,7 +56,7 @@ export default function ServicesNav({ links }: { links: ServiceLink[] }) {
         <select
           onChange={(e) => router.push(e.target.value)}
           value={pathname}
-          className="w-full p-3 rounded-lg border border-slate-300 bg-white text-slate-700 font-medium shadow-sm focus:ring-2 focus:ring-brand focus:border-brand"
+          className="w-full p-3 rounded-lg border border-slate-300 bg-white text-slate-700 font-medium shadow-xs focus:ring-2 focus:ring-brand focus:border-brand"
         >
           {links.map((item) => (
             <option key={item.slug} value={item.href}>

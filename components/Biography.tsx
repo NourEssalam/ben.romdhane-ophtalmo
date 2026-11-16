@@ -47,7 +47,7 @@ export default function Biography({
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
                 {data.badge && (
                   <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <p className="text-xs sm:text-sm font-medium bg-brand/90 backdrop-blur-sm px-3 py-1.5 rounded-lg inline-block">
+                    <p className="text-xs sm:text-sm font-medium bg-brand/90 backdrop-blur-xs px-3 py-1.5 rounded-lg inline-block">
                       {data.badge}
                     </p>
                   </div>
@@ -60,7 +60,7 @@ export default function Biography({
               {/* Main Title */}
               <div className="border-l-4 border-brand pl-4">
                 <div className="flex items-start gap-3">
-                  <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6 text-brand flex-shrink-0 mt-1" />
+                  <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6 text-brand shrink-0 mt-1" />
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
                       {data.headline}
@@ -78,7 +78,7 @@ export default function Biography({
                 {/* Education */}
                 <div className="bg-blue-50/50 rounded-lg p-4">
                   <div className="flex items-start gap-3">
-                    <GraduationCap className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <GraduationCap className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-sm sm:text-base text-slate-900">
                         {data.education?.institution}
@@ -95,7 +95,7 @@ export default function Biography({
                 {/* Professional Experience */}
                 <div className="bg-emerald-50/50 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
-                    <Building2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                    <Building2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                     <h4 className="font-semibold text-sm sm:text-base text-slate-900">
                       {data.experience?.title}
                     </h4>
@@ -106,7 +106,7 @@ export default function Biography({
                         key={entry.id ?? i}
                         className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
                       >
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
                         <span>{entry.item}</span>
                       </li>
                     ))}
@@ -116,7 +116,7 @@ export default function Biography({
                 {/* Additional Diplomas */}
                 <div className="bg-amber-50/50 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
-                    <Award className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <Award className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-sm sm:text-base text-slate-900">
                         {data.diplomas?.title}
@@ -134,7 +134,7 @@ export default function Biography({
                         key={entry.id ?? i}
                         className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
                       >
-                        <div className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0 mt-1.5" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5" />
                         <span>{entry.item}</span>
                       </li>
                     ))}

@@ -58,7 +58,7 @@ export default async function InterventionsPage({ params }: LocaleParams) {
               {sub.interventions && (
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <div className="w-1 h-6 rounded bg-brand" />
+                    <div className="w-1 h-6 rounded-sm bg-brand" />
                     {t("interventions")}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
