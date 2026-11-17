@@ -27,7 +27,7 @@ export default function BiographyDetails({
       <div className="sm:hidden text-center pt-2">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="inline-flex items-center gap-2 text-brand font-semibold text-sm hover:text-brand-dark transition-colors"
+          className="inline-flex min-h-11 items-center gap-2 text-brand font-medium text-sm hover:text-brand-hover transition-colors"
         >
           <span>{isExpanded ? t("showLess") : t("showMore")}</span>
           <ChevronDown

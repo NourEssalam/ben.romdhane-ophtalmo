@@ -61,7 +61,7 @@ One phase per session. Analyse and report first, then implement. Use only the to
   - Cards: photo on top with warm overlay, icon tile, serif title, `accent` bullet dots, "En savoir plus" link.
   - Sidebar active row: `brand` background, `on-brand` text, no tinted shadow.
 
-- [ ] **Phase 5: Biography.** Replace the blue, emerald and amber panels with `surface` cards and `brand` icons. Keep the layout and the "Voir plus" toggles.
+- [x] **Phase 5: Biography.** Replace the blue, emerald and amber panels with `surface` cards and `brand` icons. Keep the layout and the "Voir plus" toggles.
 
 - [ ] **Phase 6: Testimonials.** One large featured quote on `brand` with `on-brand` text and an `accent` quote glyph, smaller quotes as `surface` cards.
   - Arabic reviews: `font-arabic`, `dir="rtl"`, line-height 1.8. Keep the carousel logic and timing.
