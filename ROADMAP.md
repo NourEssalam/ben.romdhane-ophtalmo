@@ -66,7 +66,7 @@ One phase per session. Analyse and report first, then implement. Use only the to
 - [x] **Phase 6: Testimonials.** One large featured quote on `brand` with `on-brand` text and an `accent` quote glyph, smaller quotes as `surface` cards.
   - Arabic reviews: `font-arabic`, `dir="rtl"`, line-height 1.8. Keep the carousel logic and timing.
 
-- [ ] **Phase 7: Contact.** Flat `surface` panels, `brand` icons, same information and order.
+- [x] **Phase 7: Contact.** Flat `surface` panels, `brand` icons, same information and order.
 
 - [ ] **Phase 8: Polish and cleanup.**
   - Grep for leftover `slate-*`, `backdrop-blur`, old gradients and hard-coded hex values, and replace them.
