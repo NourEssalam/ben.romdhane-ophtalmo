@@ -1,56 +1,63 @@
 @import "tailwindcss";
 
 /*
-  Theme tokens. Raw values swap on <html data-theme="dark">,
+  Theme tokens (see ROADMAP.md). Raw values swap on <html data-theme="dark">,
   which components/ThemeScript.tsx sets before first paint.
 */
 :root {
   color-scheme: light;
-  --surface: #ffffff;        /* white */
-  --surface-muted: #f8fafc;  /* slate-50 */
-  --surface-subtle: #f1f5f9; /* slate-100 */
-  --fg: #0f172a;             /* slate-900 */
-  --fg-body: #334155;        /* slate-700 */
-  --fg-muted: #475569;       /* slate-600 */
-  --fg-subtle: #94a3b8;      /* slate-400 */
-  --line: #e2e8f0;           /* slate-200 */
-  --line-strong: #cbd5e1;    /* slate-300 */
-  --brand-tint: #e6f4f1;
+  --bg: #faf6ee;          /* page */
+  --sand: #f3ecdf;        /* alternate sections, footer */
+  --surface: #fffdf8;     /* cards */
+  --line: #e6dccb;        /* borders */
+  --ink: #18262f;         /* headings */
+  --text: #3e4650;        /* body */
+  --muted: #6b6459;       /* labels */
+  --brand: #1e4e6e;       /* buttons, links, icons */
+  --brand-hover: #163c56; /* hover, focus ring */
+  --on-brand: #fffdf8;    /* text on brand */
+  --accent: #3e9c9a;      /* decorative only, never text */
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --surface: #0f172a;        /* slate-900 */
-  --surface-muted: #0b1220;
-  --surface-subtle: #1e293b; /* slate-800 */
-  --fg: #f1f5f9;             /* slate-100 */
-  --fg-body: #cbd5e1;        /* slate-300 */
-  --fg-muted: #94a3b8;       /* slate-400 */
-  --fg-subtle: #64748b;      /* slate-500 */
-  --line: #1e293b;           /* slate-800 */
-  --line-strong: #334155;    /* slate-700 */
-  --brand-tint: #123c38;
+  --bg: #15130f;
+  --sand: #1a1814;
+  --surface: #1e1b16;
+  --line: #2e2a23;
+  --ink: #efe8da;
+  --text: #cfc6b6;
+  --muted: #a39a8a;
+  --brand: #8db7d2;
+  --brand-hover: #b3d0e3;
+  --on-brand: #10202b;
+  --accent: #6cc3be;
 }
 
 @theme inline {
+  --color-bg: var(--bg);
+  --color-sand: var(--sand);
   --color-surface: var(--surface);
-  --color-surface-muted: var(--surface-muted);
-  --color-surface-subtle: var(--surface-subtle);
-  --color-fg: var(--fg);
-  --color-fg-body: var(--fg-body);
-  --color-fg-muted: var(--fg-muted);
-  --color-fg-subtle: var(--fg-subtle);
   --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --color-brand-light: var(--brand-tint);
+  --color-ink: var(--ink);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-on-brand: var(--on-brand);
+  --color-accent: var(--accent);
+  /* Warm brown for scrims, photo overlays and shadows (never black or slate). */
+  --color-warm: #4a341c;
 }
 
 @theme {
-  --color-brand: #2aa79b;
-  --color-brand-dark: #1b6f67;
-  --color-accent: #67b3ff;
+  /* --font-newsreader / --font-figtree / --font-naskh come from lib/fonts.ts. */
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, "Segoe UI", Roboto, Tahoma, Arial, "Noto Sans", sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman", serif;
+  --font-arabic: var(--font-naskh), var(--font-figtree), ui-sans-serif, system-ui, "Segoe UI", Tahoma, Arial, sans-serif;
 
-  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Tahoma, Arial, "Noto Sans", sans-serif;
+  --radius-card: 22px;
+  --shadow-card: 0 14px 30px -14px rgb(74 52 28 / 0.28), 0 2px 6px -2px rgb(74 52 28 / 0.1);
 
   --animate-fadeInUp: fadeInUp 700ms ease-out forwards;
 
@@ -66,8 +73,8 @@
   }
 }
 
-/* Default border colour follows the theme (v3 default was gray-200). */
 @layer base {
+  /* Default border colour follows the theme (v3 default was gray-200). */
   *,
   ::after,
   ::before,
@@ -75,14 +82,48 @@
   ::file-selector-button {
     border-color: var(--color-line, currentcolor);
   }
+
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  /* Arabic: body, headings and font-sans / font-serif all switch to Naskh. */
+  [lang="ar"],
+  [dir="rtl"] {
+    --font-sans: var(--font-arabic);
+    /* Newsreader stays second so Latin names in headings keep the serif. */
+    --font-serif: var(--font-naskh), var(--font-newsreader), ui-serif, Georgia, serif;
+  }
+
+  html {
+    @apply bg-bg;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-medium text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-hover);
+    outline-offset: 2px;
+  }
 }
 
-:root {
-  scroll-behavior: smooth;
-}
-
-html, body {
-  @apply bg-surface text-fg;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .container-section {
@@ -93,6 +134,31 @@ html, body {
   @apply py-12 sm:py-16 md:py-20;
 }
 
-.card {
-  @apply bg-surface/80 backdrop-blur-sm rounded-xl shadow-xs ring-1 ring-line hover:shadow-md transition;
+/* Shared patterns. In the components layer so utilities on the same element win. */
+@layer components {
+  .card {
+    @apply bg-surface border border-line rounded-card;
+  }
+
+  /* Opt-in hover for clickable cards: lift 3px, soft warm shadow, no scale. */
+  .card-hover {
+    @apply transition duration-200 hover:-translate-y-[3px] hover:shadow-card;
+  }
+
+  /* Pill button, 44px tall. Add btn-lg for the 52px hero size. */
+  .btn {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm lg:text-base font-medium transition-colors duration-200;
+  }
+
+  .btn-lg {
+    @apply h-[52px] px-7 text-base;
+  }
+
+  .btn-primary {
+    @apply bg-brand text-on-brand hover:bg-brand-hover;
+  }
+
+  .btn-secondary {
+    @apply border border-ink/30 text-ink hover:bg-sand;
+  }
 }

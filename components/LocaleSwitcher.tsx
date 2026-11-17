@@ -15,7 +15,7 @@ export default function LocaleSwitcher({ className = "" }: { className?: string 
       aria-label={t("label")}
       value={locale}
       onChange={(e) => router.replace(pathname, { locale: e.target.value as Locale })}
-      className={`rounded-lg border border-line-strong bg-surface px-2 py-1 text-sm text-fg-body focus:border-brand focus:ring-2 focus:ring-brand ${className}`}
+      className={`h-10 rounded-full border border-line bg-surface px-3 lg:px-4 text-sm lg:text-base text-text cursor-pointer transition-colors duration-200 hover:border-brand ${className}`}
     >
       {routing.locales.map((l) => (
         <option key={l} value={l} lang={l}>

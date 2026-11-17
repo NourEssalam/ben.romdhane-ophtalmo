@@ -15,63 +15,58 @@ export default async function InterventionsPage({ params }: LocaleParams) {
 
   return (
     <main>
-      <header className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-3 rounded-xl bg-brand/10">
-            <Icon className="w-8 h-8 text-brand" />
-          </div>
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-fg">
-              {category.title}
-            </h1>
-            <p className="mt-1 text-fg-muted">
-              {category.subtitle}
-            </p>
-          </div>
+      <header className="mb-8 flex items-center gap-4">
+        <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-line bg-surface text-brand">
+          <Icon aria-hidden="true" className="h-7 w-7" />
+        </div>
+        <div>
+          <h1 className="text-3xl sm:text-4xl">{category.title}</h1>
+          <p className="mt-1 text-muted">{category.subtitle}</p>
         </div>
       </header>
 
       <div className="space-y-8">
         {subcategories.map((sub) => (
           <article key={sub.key} className="card overflow-hidden">
-            <div className="relative h-64 sm:h-80 overflow-hidden">
+            <div className="relative h-56 sm:h-72 overflow-hidden bg-sand">
               {sub.image && (
                 <Image
                   src={sub.image.src}
                   alt={sub.image.alt}
                   fill
+                  sizes="(min-width: 1024px) 70vw, 100vw"
                   className="object-cover"
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                  {sub.name}
-                </h2>
-                <p className="text-white/90 text-sm sm:text-base">
-                  {sub.description}
-                </p>
-              </div>
+              <div className="absolute inset-0 bg-linear-to-t from-warm/40 to-transparent" />
             </div>
 
             <div className="p-6 sm:p-8">
+              <h2 className="text-2xl sm:text-3xl">{sub.name}</h2>
+              <p className="mt-2 text-sm sm:text-base leading-relaxed text-text">
+                {sub.description}
+              </p>
+
               {sub.interventions && (
-                <div>
-                  <h3 className="text-lg font-bold text-fg mb-4 flex items-center gap-2">
-                    <div className="w-1 h-6 rounded-sm bg-brand" />
+                <div className="mt-8">
+                  <h3 className="mb-4 flex items-center gap-3 text-lg">
+                    <span aria-hidden="true" className="h-5 w-0.5 shrink-0 bg-accent" />
                     {t("interventions")}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {sub.interventions.map((it, i) => (
                       <div
                         key={i}
-                        className="p-5 bg-surface-muted rounded-xl border-2 border-line hover:border-brand/30 transition-colors"
+                        className="rounded-xl border border-line bg-sand p-5"
                       >
-                        <h4 className="font-bold text-base text-fg mb-2 flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-brand" />
+                        <h4 className="mb-2 flex items-center gap-2.5 text-base font-semibold text-ink">
+                          <span
+                            aria-hidden="true"
+                            className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                          />
                           {it.name}
                         </h4>
-                        <p className="text-sm text-fg-muted">{it.desc}</p>
+                        <p className="text-sm lg:text-base text-muted">{it.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -84,4 +79,3 @@ export default async function InterventionsPage({ params }: LocaleParams) {
     </main>
   );
 }
-

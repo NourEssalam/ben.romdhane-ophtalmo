@@ -7,14 +7,14 @@ export default function NotFound() {
   return (
     <main className="section-padding">
       <div className="container-section text-center">
-        <p className="text-sm font-semibold text-brand">{t("code")}</p>
-        <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-fg">
+        <p className="text-sm lg:text-base font-semibold text-brand">{t("code")}</p>
+        <h1 className="mt-2 text-3xl sm:text-4xl text-ink">
           {t("title")}
         </h1>
-        <p className="mt-4 text-fg-muted">{t("text")}</p>
+        <p className="mt-4 text-muted">{t("text")}</p>
         <Link
           href="/"
-          className="mt-8 inline-block rounded-lg bg-brand px-6 py-3 font-medium text-white shadow-md shadow-brand/20 hover:opacity-90"
+          className="btn btn-primary mt-8"
         >
           {t("back")}
         </Link>

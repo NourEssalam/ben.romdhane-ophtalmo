@@ -54,7 +54,7 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
     }
   };
 
-  const base = `inline-flex items-center justify-center p-2 rounded-lg text-fg-body hover:text-brand hover:bg-surface-subtle transition-colors duration-200 shrink-0 ${className}`;
+  const base = `inline-flex h-10 w-10 items-center justify-center rounded-full text-text hover:text-brand hover:bg-sand transition-colors duration-200 shrink-0 ${className}`;
 
   if (!theme) return <span className={base} aria-hidden="true"><span className="w-5 h-5" /></span>;
 

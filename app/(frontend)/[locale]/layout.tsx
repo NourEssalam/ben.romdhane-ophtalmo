@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import ContactFooter from "@/components/ContactFooter";
 import { getGlobal, getServiceCategories, toServiceLinks } from "@/lib/payload";
 import { localeDir, routing } from "@/i18n/routing";
+import { fontVariables } from "@/lib/fonts";
 import { initLocale, type LocaleParams } from "@/i18n/locale";
 
 export function generateStaticParams() {
@@ -32,7 +33,7 @@ export default async function LocaleLayout({
   ]);
 
   return (
-    <html lang={locale} dir={localeDir(locale)} suppressHydrationWarning>
+    <html lang={locale} dir={localeDir(locale)} className={fontVariables} suppressHydrationWarning>
       <head>
         <ThemeScript />
       </head>

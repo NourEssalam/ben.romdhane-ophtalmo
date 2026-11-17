@@ -11,6 +11,7 @@ import ContactFooter from "@/components/ContactFooter";
 import NotFound from "./(frontend)/[locale]/not-found";
 import { NextIntlClientProvider } from "next-intl";
 import { getGlobal, getServiceCategories, toServiceLinks } from "@/lib/payload";
+import { fontVariables } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: "Page introuvable | Dr Brahim Ben Romdhane",
@@ -24,7 +25,7 @@ export default async function GlobalNotFound() {
   ]);
 
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="fr" className={fontVariables} suppressHydrationWarning>
       <head>
         <ThemeScript />
       </head>
