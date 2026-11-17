@@ -58,7 +58,7 @@ export default async function PathologiesPage({ params }: LocaleParams) {
                     {sub.conditions.map((cond, i) => (
                       <span
                         key={i}
-                        className="rounded-full border border-line bg-sand px-4 py-2 text-sm font-medium text-ink"
+                        className="rounded-full border border-line bg-sand px-4 py-2 text-sm lg:text-base font-medium text-ink"
                       >
                         {cond}
                       </span>
@@ -85,7 +85,7 @@ export default async function PathologiesPage({ params }: LocaleParams) {
                         <h4 className="mb-1 text-base font-semibold text-ink">
                           {t.name}
                         </h4>
-                        <p className="text-sm text-muted">{t.desc}</p>
+                        <p className="text-sm lg:text-base text-muted">{t.desc}</p>
                       </div>
                     ))}
                   </div>

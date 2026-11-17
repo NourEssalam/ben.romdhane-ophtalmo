@@ -61,7 +61,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
                 <h3 className="text-xl leading-snug">{service.title}</h3>
 
                 {service.description && (
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                  <p className="mt-2 text-sm lg:text-base leading-relaxed text-muted">
                     {service.description}
                   </p>
                 )}
@@ -71,7 +71,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
                   {service.features.map((feature, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-2.5 text-sm text-text"
+                      className="flex items-start gap-2.5 text-sm lg:text-base text-text"
                     >
                       <span
                         aria-hidden="true"
@@ -83,7 +83,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
                 </ul>
 
                 {/* CTA */}
-                <div className="mt-auto flex items-center gap-2 text-sm font-medium text-brand">
+                <div className="mt-auto flex items-center gap-2 text-sm lg:text-base font-medium text-brand">
                   <span>{t("learnMore")}</span>
                   <ArrowRight
                     aria-hidden="true"
@@ -101,7 +101,7 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           aria-expanded={isExpanded}
-          className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-brand hover:text-brand-hover transition-colors"
+          className="inline-flex min-h-11 items-center gap-2 text-sm lg:text-base font-medium text-brand hover:text-brand-hover transition-colors"
         >
           <span>{isExpanded ? t("showLess") : t("showAll")}</span>
           <ChevronDown

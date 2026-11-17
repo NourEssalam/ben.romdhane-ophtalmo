@@ -68,7 +68,7 @@ One phase per session. Analyse and report first, then implement. Use only the to
 
 - [x] **Phase 7: Contact.** Flat `surface` panels, `brand` icons, same information and order.
 
-- [ ] **Phase 8: Polish and cleanup.**
+- [x] **Phase 8: Polish and cleanup.**
   - Grep for leftover `slate-*`, `backdrop-blur`, old gradients and hard-coded hex values, and replace them.
   - Remove the old `brand-*` aliases and the unused `accent` favicon token if nothing uses them.
   - Check every page in light and dark, in all four locales, at 375px, 768px and 1280px.

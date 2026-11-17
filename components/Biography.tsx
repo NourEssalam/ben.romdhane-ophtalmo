@@ -47,7 +47,7 @@ export default function Biography({
               <div className="absolute inset-0 bg-linear-to-t from-warm/40 to-transparent" />
               {data.badge && (
                 <div className="absolute bottom-3 left-3 right-3">
-                  <p className="inline-block rounded-full bg-brand px-3.5 py-1.5 text-xs sm:text-sm font-medium text-on-brand">
+                  <p className="inline-block rounded-full bg-brand px-3.5 py-1.5 text-xs sm:text-sm lg:text-base font-medium text-on-brand">
                     {data.badge}
                   </p>
                 </div>
@@ -64,7 +64,7 @@ export default function Biography({
                 <div>
                   <h3 className="text-lg sm:text-xl mb-1">{data.headline}</h3>
                   {data.headlineSubtitle && (
-                    <p className="text-sm text-muted">
+                    <p className="text-sm lg:text-base text-muted">
                       {data.headlineSubtitle}
                     </p>
                   )}
@@ -84,7 +84,7 @@ export default function Biography({
                       {data.education?.institution}
                     </h4>
                     {data.education?.diploma && (
-                      <p className="text-sm text-muted mt-1">
+                      <p className="text-sm lg:text-base text-muted mt-1">
                         {data.education.diploma}
                       </p>
                     )}
@@ -106,7 +106,7 @@ export default function Biography({
                   {experienceItems.map((entry, i) => (
                     <li
                       key={entry.id ?? i}
-                      className="flex items-start gap-2.5 text-sm text-text"
+                      className="flex items-start gap-2.5 text-sm lg:text-base text-text"
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2" />
                       <span>{entry.item}</span>
@@ -126,7 +126,7 @@ export default function Biography({
                       {data.diplomas?.title}
                     </h4>
                     {data.diplomas?.institution && (
-                      <p className="text-sm text-muted mt-0.5">
+                      <p className="text-sm lg:text-base text-muted mt-0.5">
                         {data.diplomas.institution}
                       </p>
                     )}
@@ -136,7 +136,7 @@ export default function Biography({
                   {diplomaItems.map((entry, i) => (
                     <li
                       key={entry.id ?? i}
-                      className="flex items-start gap-2.5 text-sm text-text"
+                      className="flex items-start gap-2.5 text-sm lg:text-base text-text"
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2" />
                       <span>{entry.item}</span>

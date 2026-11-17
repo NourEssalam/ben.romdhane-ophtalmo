@@ -43,7 +43,7 @@ export default function Hero({
       <div className="container-section grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2 lg:gap-16 lg:py-20">
         {/* Text */}
         <div className="animate-fadeInUp">
-          <p className="flex items-center gap-3 text-sm font-medium uppercase tracking-wider text-muted rtl:tracking-normal">
+          <p className="flex items-center gap-3 text-sm lg:text-base font-medium uppercase tracking-wider text-muted rtl:tracking-normal">
             <span aria-hidden="true" className="h-px w-10 shrink-0 bg-accent" />
             {tLogo("specialty")} · {tFooter("location")}
           </p>
@@ -74,7 +74,7 @@ export default function Hero({
           )}
 
           {(phone || hours) && (
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-line pt-6 text-sm text-text">
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-line pt-6 text-sm lg:text-base text-text">
               {phone && (
                 <a
                   href={`tel:${phone.number}`}

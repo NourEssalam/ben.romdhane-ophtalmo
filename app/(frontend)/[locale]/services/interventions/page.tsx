@@ -66,7 +66,7 @@ export default async function InterventionsPage({ params }: LocaleParams) {
                           />
                           {it.name}
                         </h4>
-                        <p className="text-sm text-muted">{it.desc}</p>
+                        <p className="text-sm lg:text-base text-muted">{it.desc}</p>
                       </div>
                     ))}
                   </div>

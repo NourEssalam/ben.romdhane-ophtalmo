@@ -78,7 +78,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
           <Logo />
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 text-sm">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm lg:text-base">
             <Link href="/" className="text-text hover:text-brand transition-colors duration-200">{t("home")}</Link>
             <div 
               className="relative"

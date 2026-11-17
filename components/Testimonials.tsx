@@ -106,7 +106,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
           >
             {featured.text}
           </blockquote>
-          <figcaption className="mt-6 text-sm font-medium">
+          <figcaption className="mt-6 text-sm lg:text-base font-medium">
             — {featured.name}
           </figcaption>
         </figure>
@@ -191,7 +191,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
                         >
                           {review.text}
                         </p>
-                        <footer className="mt-4 text-sm font-medium text-ink">
+                        <footer className="mt-4 text-sm lg:text-base font-medium text-ink">
                           — {review.name}
                         </footer>
                       </blockquote>

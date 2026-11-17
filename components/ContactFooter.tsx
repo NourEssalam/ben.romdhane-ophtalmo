@@ -23,7 +23,7 @@ function Row({
         <Icon aria-hidden="true" className="w-5 h-5" />
       </div>
       <div className="min-w-0">
-        <p className="text-sm font-medium text-muted">{label}</p>
+        <p className="text-sm lg:text-base font-medium text-muted">{label}</p>
         <p className="mt-0.5 text-base text-text">{children}</p>
       </div>
     </li>

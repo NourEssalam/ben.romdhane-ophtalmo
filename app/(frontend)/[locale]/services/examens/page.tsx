@@ -64,7 +64,7 @@ export default async function ExamensPage({ params }: LocaleParams) {
                           aria-hidden="true"
                           className="mt-0.5 h-4 w-4 shrink-0 text-brand rtl:rotate-180"
                         />
-                        <span className="text-sm font-medium text-ink">{eq}</span>
+                        <span className="text-sm lg:text-base font-medium text-ink">{eq}</span>
                       </div>
                     ))}
                   </div>
@@ -87,7 +87,7 @@ export default async function ExamensPage({ params }: LocaleParams) {
                           aria-hidden="true"
                           className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
                         />
-                        <span className="text-sm text-text">{app}</span>
+                        <span className="text-sm lg:text-base text-text">{app}</span>
                       </div>
                     ))}
                   </div>

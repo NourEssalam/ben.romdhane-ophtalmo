@@ -21,7 +21,7 @@ export default function Services({ cards }: { cards: ServiceCard[] }) {
 
         {/* Bottom CTA */}
         <div className="mt-8 sm:mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-5">
-          <p className="text-sm text-muted">{t("ctaQuestion")}</p>
+          <p className="text-sm lg:text-base text-muted">{t("ctaQuestion")}</p>
           <a href="#contact" className="btn btn-primary">
             {t("ctaButton")}
           </a>

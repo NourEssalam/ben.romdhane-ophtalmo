@@ -48,17 +48,6 @@
   --color-accent: var(--accent);
   /* Warm brown for scrims, photo overlays and shadows (never black or slate). */
   --color-warm: #4a341c;
-
-  /* Old names, pointed at the new palette. Removed in Phase 8. */
-  --color-surface-muted: var(--sand);
-  --color-surface-subtle: var(--sand);
-  --color-fg: var(--ink);
-  --color-fg-body: var(--text);
-  --color-fg-muted: var(--muted);
-  --color-fg-subtle: var(--muted);
-  --color-line-strong: var(--line);
-  --color-brand-dark: var(--brand-hover);
-  --color-brand-light: color-mix(in srgb, var(--brand) 12%, var(--surface));
 }
 
 @theme {
@@ -158,7 +147,7 @@
 
   /* Pill button, 44px tall. Add btn-lg for the 52px hero size. */
   .btn {
-    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition-colors duration-200;
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm lg:text-base font-medium transition-colors duration-200;
   }
 
   .btn-lg {

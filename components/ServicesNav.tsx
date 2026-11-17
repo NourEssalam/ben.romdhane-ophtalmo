@@ -16,7 +16,7 @@ export default function ServicesNav({ links }: { links: ServiceLink[] }) {
         <nav className="sticky top-24">
           <div className="card p-2">
             <div className="p-3 mb-1">
-              <h2 className="font-sans text-xs font-semibold text-muted uppercase tracking-wider rtl:tracking-normal">
+              <h2 className="font-sans text-xs lg:text-sm font-semibold text-muted uppercase tracking-wider rtl:tracking-normal">
                 {t("navTitle")}
               </h2>
             </div>
@@ -41,7 +41,7 @@ export default function ServicesNav({ links }: { links: ServiceLink[] }) {
                           isActive ? "" : "text-muted group-hover:text-brand"
                         }`}
                       />
-                      <span className="font-medium text-sm">{item.label}</span>
+                      <span className="font-medium text-sm lg:text-base">{item.label}</span>
                     </Link>
                   </li>
                 );
