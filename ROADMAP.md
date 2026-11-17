@@ -53,7 +53,7 @@ One phase per session. Analyse and report first, then implement. Use only the to
   - Header: `bg` at 92% opacity, 1px `line` bottom border, no blur. Logo in serif with the surname in italic `brand`.
   - Footer: `sand` background, serif practice name.
 
-- [ ] **Phase 3: Hero.** Two columns on desktop (text left, photo right), stacked on mobile.
+- [x] **Phase 3: Hero.** Two columns on desktop (text left, photo right), stacked on mobile.
   - Small label with an `accent` rule, large serif headline, intro, two buttons, phone and hours row.
   - Photo with one large rounded corner and a warm overlay. Keep the existing slides and their timing.
 

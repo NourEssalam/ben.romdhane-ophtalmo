@@ -14,8 +14,9 @@ import { initLocale, type LocaleParams } from "@/i18n/locale";
 
 export default async function Page({ params }: LocaleParams) {
   const locale = await initLocale(params);
-  const [hero, categories, biography, testimonials] = await Promise.all([
+  const [hero, contact, categories, biography, testimonials] = await Promise.all([
     getGlobal("hero", locale),
+    getGlobal("contact", locale),
     getServiceCategories(locale),
     getGlobal("biography", locale),
     getTestimonials(),
@@ -42,6 +43,8 @@ export default async function Page({ params }: LocaleParams) {
         intro={hero.intro}
         primaryCtaLabel={hero.primaryCtaLabel}
         secondaryCtaLabel={hero.secondaryCtaLabel}
+        phone={contact.phones?.[0] ?? null}
+        hours={contact.hours}
       />
       <Services cards={cards} />
       <Biography data={biography} photo={mediaProps(biography.photo)} />
