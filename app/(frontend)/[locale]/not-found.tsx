@@ -14,7 +14,7 @@ export default function NotFound() {
         <p className="mt-4 text-fg-muted">{t("text")}</p>
         <Link
           href="/"
-          className="mt-8 inline-block rounded-lg bg-brand px-6 py-3 font-medium text-white shadow-md shadow-brand/20 hover:opacity-90"
+          className="btn btn-primary mt-8"
         >
           {t("back")}
         </Link>

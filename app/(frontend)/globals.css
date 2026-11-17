@@ -46,6 +46,8 @@
   --color-brand-hover: var(--brand-hover);
   --color-on-brand: var(--on-brand);
   --color-accent: var(--accent);
+  /* Warm brown for scrims, photo overlays and shadows (never black or slate). */
+  --color-warm: #4a341c;
 
   /* Old names, pointed at the new palette. Removed in Phase 8. */
   --color-surface-muted: var(--sand);
@@ -64,6 +66,9 @@
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, "Segoe UI", Roboto, Tahoma, Arial, "Noto Sans", sans-serif;
   --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman", serif;
   --font-arabic: var(--font-naskh), var(--font-figtree), ui-sans-serif, system-ui, "Segoe UI", Tahoma, Arial, sans-serif;
+
+  --radius-card: 22px;
+  --shadow-card: 0 14px 30px -14px rgb(74 52 28 / 0.28), 0 2px 6px -2px rgb(74 52 28 / 0.1);
 
   --animate-fadeInUp: fadeInUp 700ms ease-out forwards;
 
@@ -97,7 +102,8 @@
   [lang="ar"],
   [dir="rtl"] {
     --font-sans: var(--font-arabic);
-    --font-serif: var(--font-arabic);
+    /* Newsreader stays second so Latin names in headings keep the serif. */
+    --font-serif: var(--font-naskh), var(--font-newsreader), ui-serif, Georgia, serif;
   }
 
   html {
@@ -139,6 +145,31 @@
   @apply py-12 sm:py-16 md:py-20;
 }
 
-.card {
-  @apply bg-surface/80 backdrop-blur-sm rounded-xl shadow-xs ring-1 ring-line hover:shadow-md transition;
+/* Shared patterns. In the components layer so utilities on the same element win. */
+@layer components {
+  .card {
+    @apply bg-surface border border-line rounded-card;
+  }
+
+  /* Opt-in hover for clickable cards: lift 3px, soft warm shadow, no scale. */
+  .card-hover {
+    @apply transition duration-200 hover:-translate-y-[3px] hover:shadow-card;
+  }
+
+  /* Pill button, 44px tall. Add btn-lg for the 52px hero size. */
+  .btn {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition-colors duration-200;
+  }
+
+  .btn-lg {
+    @apply h-[52px] px-7 text-base;
+  }
+
+  .btn-primary {
+    @apply bg-brand text-on-brand hover:bg-brand-hover;
+  }
+
+  .btn-secondary {
+    @apply border border-ink/30 text-ink hover:bg-sand;
+  }
 }

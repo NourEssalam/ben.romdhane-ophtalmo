@@ -6,7 +6,7 @@ export default function Logo() {
   const t = useTranslations("Logo");
   return (
     <Link href="/" className="flex items-center gap-2">
-      <div className="h-10 w-10 rounded-full bg-brand/10 ring-1 ring-brand/30 grid place-items-center overflow-hidden">
+      <div className="h-10 w-10 rounded-full bg-surface border border-line grid place-items-center overflow-hidden">
         <Image
           src="/logo_transparent.png"
           alt={t("alt")}
@@ -17,10 +17,10 @@ export default function Logo() {
         />
       </div>
       <div className="leading-tight">
-        <p className="font-semibold">
-          Dr Brahim <i className="italic text-lg">Ben Romdhane</i>
+        <p className="font-serif text-lg font-medium text-ink">
+          Dr Brahim <i className="italic text-brand">Ben Romdhane</i>
         </p>
-        <p className="text-xs text-fg-muted">{t("specialty")}</p>
+        <p className="text-xs text-muted">{t("specialty")}</p>
       </div>
     </Link>
   );

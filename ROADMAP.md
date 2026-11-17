@@ -49,7 +49,7 @@ One phase per session. Analyse and report first, then implement. Use only the to
   - Base layer: body = `bg-bg text-text font-sans`; h1–h3 = `font-serif font-medium text-ink`.
   - Global `:focus-visible` = 2px `brand-hover` outline, 2px offset. Add a `prefers-reduced-motion` rule that disables transitions, animations and smooth scroll.
 
-- [ ] **Phase 2: Shared UI.** Button and card class patterns, header (logo, nav, language switcher, dark toggle, mobile menu), footer.
+- [x] **Phase 2: Shared UI.** Button and card class patterns, header (logo, nav, language switcher, dark toggle, mobile menu), footer.
   - Header: `bg` at 92% opacity, 1px `line` bottom border, no blur. Logo in serif with the surname in italic `brand`.
   - Footer: `sand` background, serif practice name.
 

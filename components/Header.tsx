@@ -17,14 +17,12 @@ const sections = [
 
 export default function Header({ services }: { services: ServiceLink[] }) {
   const t = useTranslations("Header");
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 10);
       // Close mobile menu on scroll
       if (mobileMenuOpen) {
         setMobileMenuOpen(false);
@@ -74,24 +72,20 @@ export default function Header({ services }: { services: ServiceLink[] }) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all ${
-          scrolled
-            ? "bg-surface/95 backdrop-blur-md shadow-md"
-            : "bg-surface/80 backdrop-blur-xs"
-        } border-b border-line`}
+        className="fixed top-0 left-0 right-0 z-50 bg-bg/92 border-b border-line"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
           <Logo />
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            <Link href="/" className="text-fg-body hover:text-brand transition-colors duration-200">{t("home")}</Link>
+            <Link href="/" className="text-text hover:text-brand transition-colors duration-200">{t("home")}</Link>
             <div 
               className="relative"
               onMouseEnter={() => setServicesDropdownOpen(true)}
               onMouseLeave={() => setServicesDropdownOpen(false)}
             >
-              <button className="text-fg-body hover:text-brand transition-colors duration-200 cursor-pointer">
+              <button className="text-text hover:text-brand transition-colors duration-200 cursor-pointer">
                 {t("services")}
               </button>
               <div className={`absolute left-0 top-full w-72 z-50 transition-all duration-200 ${
@@ -99,12 +93,12 @@ export default function Header({ services }: { services: ServiceLink[] }) {
               }`}>
                 {/* Invisible bridge area to prevent gap */}
                 <div className="h-2 w-full" />
-                <div className="card p-2 shadow-lg">
+                <div className="card p-2 shadow-card">
                   {services.map((service) => (
                     <Link
                       key={service.slug}
                       href={service.href}
-                      className="block px-3 py-2 rounded-sm hover:bg-surface-subtle text-fg-body transition-colors"
+                      className="block px-3 py-2 rounded-xl hover:bg-sand text-text transition-colors"
                       onClick={() => setServicesDropdownOpen(false)}
                     >
                       {service.label}
@@ -113,9 +107,9 @@ export default function Header({ services }: { services: ServiceLink[] }) {
                 </div>
               </div>
             </div>
-            <Link href={{ pathname: "/", hash: "biographie" }} className="text-fg-body hover:text-brand transition-colors duration-200">{t("biography")}</Link>
-            <Link href={{ pathname: "/", hash: "temoignages" }} className="text-fg-body hover:text-brand transition-colors duration-200">{t("testimonials")}</Link>
-            <a href="#contact" className="text-fg-body hover:text-brand transition-colors duration-200">{t("contact")}</a>
+            <Link href={{ pathname: "/", hash: "biographie" }} className="text-text hover:text-brand transition-colors duration-200">{t("biography")}</Link>
+            <Link href={{ pathname: "/", hash: "temoignages" }} className="text-text hover:text-brand transition-colors duration-200">{t("testimonials")}</Link>
+            <a href="#contact" className="text-text hover:text-brand transition-colors duration-200">{t("contact")}</a>
             <LocaleSwitcher />
             <ThemeToggle />
           </nav>
@@ -123,7 +117,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-fg-body hover:bg-surface-subtle transition-colors duration-200 relative z-50"
+            className="md:hidden p-2 rounded-full text-text hover:bg-sand transition-colors duration-200 relative z-50"
             aria-label={t("toggleMenu")}
             aria-expanded={mobileMenuOpen}
           >
@@ -152,7 +146,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/40 z-40 backdrop-blur-xs"
+          className="md:hidden fixed inset-0 bg-warm/35 z-40"
           onClick={() => {
             setMobileMenuOpen(false);
             setMobileServicesOpen(false);
@@ -163,7 +157,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed right-0 top-[60px] bottom-0 w-full max-w-sm bg-surface z-50 shadow-2xl transition-transform duration-300 ease-out ${
+        className={`md:hidden fixed right-0 top-[60px] bottom-0 w-full max-w-sm bg-bg border-l border-line z-50 transition-transform duration-300 ease-out ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -174,7 +168,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
                 <div key={s.id} className="border-b border-line">
                   <button
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                    className="w-full text-left text-lg font-medium text-fg-body hover:text-brand hover:bg-surface-muted transition-all duration-200 py-4 px-4 rounded-lg flex items-center justify-between"
+                    className="w-full text-left text-lg font-medium text-ink hover:text-brand hover:bg-sand transition-all duration-200 py-4 px-4 rounded-lg flex items-center justify-between"
                     style={{
                       animationDelay: `${index * 50}ms`,
                     }}
@@ -208,7 +202,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
                             setMobileServicesOpen(false);
                             setMobileMenuOpen(false);
                           }}
-                          className="block px-4 py-3 rounded-lg text-base text-fg-muted hover:text-brand hover:bg-surface-muted transition-colors"
+                          className="block px-4 py-3 rounded-lg text-base text-text hover:text-brand hover:bg-sand transition-colors"
                         >
                           {service.label}
                         </Link>
@@ -226,7 +220,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
                 key={s.id}
                 href={`#${s.id}`}
                 onClick={(e) => handleLinkClick(e, s.id)}
-                className="text-lg font-medium text-fg-body hover:text-brand hover:bg-surface-muted transition-all duration-200 py-4 px-4 rounded-lg border-b border-line last:border-b-0"
+                className="text-lg font-medium text-ink hover:text-brand hover:bg-sand transition-all duration-200 py-4 px-4 rounded-lg border-b border-line last:border-b-0"
                 style={{
                   animationDelay: `${index * 50}ms`,
                 }}
@@ -242,7 +236,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
                   setMobileMenuOpen(false);
                   setMobileServicesOpen(false);
                 }}
-                className="text-lg font-medium text-fg-body hover:text-brand hover:bg-surface-muted transition-all duration-200 py-4 px-4 rounded-lg border-b border-line last:border-b-0"
+                className="text-lg font-medium text-ink hover:text-brand hover:bg-sand transition-all duration-200 py-4 px-4 rounded-lg border-b border-line last:border-b-0"
                 style={{
                   animationDelay: `${index * 50}ms`,
                 }}
@@ -252,7 +246,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
             );
           })}
           <div className="pt-4 px-4 flex items-center gap-2">
-            <LocaleSwitcher className="w-full py-2 text-base" />
+            <LocaleSwitcher className="w-full text-base" />
             <ThemeToggle />
           </div>
         </nav>
