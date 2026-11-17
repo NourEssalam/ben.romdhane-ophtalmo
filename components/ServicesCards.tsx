@@ -22,8 +22,8 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
     <>
       {/* Service Cards Grid */}
       <div
-        className={`grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3 transition-all duration-500 ${
-          !isExpanded ? "max-md:grid-rows-1 max-md:overflow-hidden" : ""
+        className={`grid gap-5 md:grid-cols-2 lg:grid-cols-3 ${
+          !isExpanded ? "max-md:grid-rows-1" : ""
         }`}
       >
         {cards.map((service, index) => {
@@ -33,58 +33,62 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
             <Link
               key={service.slug}
               href={service.href}
-              className={`group card overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
+              className={`group card card-hover flex flex-col overflow-hidden ${
                 isHidden ? "max-md:hidden" : ""
               }`}
             >
-              {/* Image */}
-              <div className="relative h-36 sm:h-40 md:h-44 overflow-hidden">
+              {/* Photo with a warm overlay from the bottom */}
+              <div className="relative h-40 sm:h-44 overflow-hidden bg-sand">
                 {service.image && (
                   <Image
                     src={service.image.src}
                     alt={service.image.alt}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent" />
-                <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
-                  <div className="p-2 rounded-xl bg-surface/95 backdrop-blur-xs shadow-lg">
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-brand" />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white">
-                    {service.title}
-                  </h3>
-                </div>
+                <div className="absolute inset-0 bg-linear-to-t from-warm/40 to-transparent" />
               </div>
 
               {/* Content */}
-              <div className="p-3 sm:p-4">
+              <div className="flex flex-1 flex-col px-5 pb-5">
+                {/* Icon tile, overlapping the photo edge */}
+                <div className="relative -mt-6 mb-4 grid h-11 w-11 place-items-center rounded-2xl border border-line bg-surface text-brand">
+                  <Icon aria-hidden="true" className="h-5 w-5" />
+                </div>
+
+                <h3 className="text-xl leading-snug">{service.title}</h3>
+
                 {service.description && (
-                  <p className="text-xs sm:text-sm text-fg-muted mb-2 sm:mb-3 leading-relaxed">
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
                     {service.description}
                   </p>
                 )}
 
                 {/* Features */}
-                <ul className="space-y-1 sm:space-y-1.5 mb-3 sm:mb-4">
+                <ul className="mt-4 mb-5 space-y-2">
                   {service.features.map((feature, idx) => (
                     <li
                       key={idx}
-                      className="flex items-center gap-2 text-xs sm:text-sm text-fg-body"
+                      className="flex items-start gap-2.5 text-sm text-text"
                     >
-                      <div className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
+                      <span
+                        aria-hidden="true"
+                        className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                      />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 {/* CTA */}
-                <div className="flex items-center gap-2 text-brand font-semibold text-xs sm:text-sm group-hover:gap-3 transition-all">
+                <div className="mt-auto flex items-center gap-2 text-sm font-medium text-brand">
                   <span>{t("learnMore")}</span>
-                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                  />
                 </div>
               </div>
             </Link>
@@ -93,14 +97,16 @@ export default function ServicesCards({ cards }: { cards: ServiceCard[] }) {
       </div>
 
       {/* Mobile Toggle Button */}
-      <div className="md:hidden text-center mt-5">
+      <div className="md:hidden mt-4">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="inline-flex items-center gap-2 text-brand font-semibold text-sm hover:text-brand-dark transition-colors"
+          aria-expanded={isExpanded}
+          className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-brand hover:text-brand-hover transition-colors"
         >
           <span>{isExpanded ? t("showLess") : t("showAll")}</span>
           <ChevronDown
-            className={`w-5 h-5 transition-transform duration-300 ${
+            aria-hidden="true"
+            className={`h-5 w-5 transition-transform duration-300 ${
               isExpanded ? "rotate-180" : ""
             }`}
           />

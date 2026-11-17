@@ -6,15 +6,13 @@ export default function Services({ cards }: { cards: ServiceCard[] }) {
   return (
     <section
       id="services"
-      className="py-10 sm:py-12 md:py-14 bg-gradient-to-b from-surface via-brand-light/30 to-surface"
+      className="section-padding bg-sand border-b border-line"
     >
       <div className="container-section">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10">
-          <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-fg mb-2 sm:mb-3">
-            {t("title")}
-          </h2>
-          <p className="text-xs sm:text-sm md:text-base text-fg-body leading-relaxed">
+        <div className="max-w-2xl mb-8 sm:mb-10">
+          <h2 className="text-3xl sm:text-4xl">{t("title")}</h2>
+          <p className="mt-3 text-base leading-relaxed text-text">
             {t("intro")}
           </p>
         </div>
@@ -22,14 +20,9 @@ export default function Services({ cards }: { cards: ServiceCard[] }) {
         <ServicesCards cards={cards} />
 
         {/* Bottom CTA */}
-        <div className="mt-6 sm:mt-8 md:mt-10 text-center">
-          <p className="text-xs sm:text-sm text-fg-body mb-2 sm:mb-3">
-            {t("ctaQuestion")}
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base text-white font-medium hover:bg-brand-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-          >
+        <div className="mt-8 sm:mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-5">
+          <p className="text-sm text-muted">{t("ctaQuestion")}</p>
+          <a href="#contact" className="btn btn-primary">
             {t("ctaButton")}
           </a>
         </div>

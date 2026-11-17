@@ -57,7 +57,7 @@ One phase per session. Analyse and report first, then implement. Use only the to
   - Small label with an `accent` rule, large serif headline, intro, two buttons, phone and hours row.
   - Photo with one large rounded corner and a warm overlay. Keep the existing slides and their timing.
 
-- [ ] **Phase 4: Services.** Home service cards, then the services pages (sidebar and detail).
+- [x] **Phase 4: Services.** Home service cards, then the services pages (sidebar and detail).
   - Cards: photo on top with warm overlay, icon tile, serif title, `accent` bullet dots, "En savoir plus" link.
   - Sidebar active row: `brand` background, `on-brand` text, no tinted shadow.
 

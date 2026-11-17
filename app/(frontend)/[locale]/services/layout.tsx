@@ -11,7 +11,7 @@ export default async function ServicesLayout({
   const categories = await getServiceCategories(await initLocale(params));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-surface-muted to-surface">
+    <div className="min-h-screen bg-bg">
       <section className="section-padding">
         <div className="container-section">
           <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
