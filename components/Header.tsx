@@ -246,7 +246,7 @@ export default function Header({ services }: { services: ServiceLink[] }) {
             );
           })}
           <div className="pt-4 px-4 flex items-center gap-2">
-            <LocaleSwitcher className="w-full text-base" />
+            <LocaleSwitcher variant="full" />
             <ThemeToggle />
           </div>
         </nav>
